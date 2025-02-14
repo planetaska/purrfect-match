@@ -1,16 +1,23 @@
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-	plugins: [sveltekit()],
-
+	server: {
+		port: 3000,
+	},
+	plugins: [
+		sveltekit(),
+		tailwindcss(),
+	],
 	test: {
 		workspace: [
 			{
 				extends: './vite.config.ts',
-				plugins: [svelteTesting()],
-
+				plugins: [
+					svelteTesting(),
+				],
 				test: {
 					name: 'client',
 					environment: 'jsdom',
@@ -22,7 +29,6 @@ export default defineConfig({
 			},
 			{
 				extends: './vite.config.ts',
-
 				test: {
 					name: 'server',
 					environment: 'node',
