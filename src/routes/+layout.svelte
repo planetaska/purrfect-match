@@ -1,6 +1,14 @@
 <script lang="ts">
-	let { children } = $props();
+	// Main CSS file
 	import "../app.css";
+
+	import MainNav from '$components/Layout/MainNav.svelte';
+
+	let { children } = $props();
 </script>
 
-{@render children()}
+<div class="bg-white">
+	<MainNav />
+
+	{@render children()}
+</div>
