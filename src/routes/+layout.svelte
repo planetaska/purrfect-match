@@ -2,6 +2,12 @@
 	import '../styles.css';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	// Main CSS file
+	import '../app.css';
+
+	import MainNav from '$components/Layout/MainNav.svelte';
+
+	let { children } = $props();
 
 	export let data;
 	// import { props } from '$props';
@@ -19,9 +25,6 @@
 
 		return () => data.subscription.unsubscribe();
 	});
-
-	let { children } = $props();
-	import '../app.css';
 </script>
 
 <svelte:head>
@@ -32,4 +35,8 @@
 	<!-- {@render } -->
 </div>
 
-{@render children()}
+<div class="bg-white">
+	<MainNav />
+
+	{@render children()}
+</div>
