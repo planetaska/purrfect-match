@@ -1,9 +1,18 @@
 <script lang="ts">
 	import { blur } from 'svelte/transition'
 
+	let { supabase, user } = $props();
 	let showMobileMenu = $state(false)
 
 	function toggleMobileMenu() { showMobileMenu = !showMobileMenu }
+
+	// handles users sign out through Supabase
+	const signOut = async () => {
+		const { error } = await supabase.auth.signOut()
+		if (error) {
+			console.error(error)
+		}
+	}
 </script>
 
 <header class="sticky inset-x-0 top-0 z-50 bg-white glass">
@@ -32,8 +41,13 @@
 			<a href="#" class="text-sm/6 font-semibold text-gray-900">About</a>
 		</div>
 		<div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-8">
-			<a href="/register" class="text-sm/6 font-semibold text-gray-900">Register</a>
-			<a href="/sign-in" class="text-sm/6 font-semibold text-gray-900">Sign in <span aria-hidden="true">&rarr;</span></a>
+			{#if user}
+				<a href={`/users/${user.id}`} class="text-sm/6 font-semibold text-gray-900">My profile</a>
+				<button onclick={signOut} class="cursor-pointer text-sm/6 font-semibold text-gray-900">Sign out</button>
+			{:else}
+				<a href="/register" class="text-sm/6 font-semibold text-gray-900">Register</a>
+				<a href="/sign-in" class="text-sm/6 font-semibold text-gray-900">Sign in <span aria-hidden="true">&rarr;</span></a>
+			{/if}
 		</div>
 	</nav>
 	<!-- Mobile menu, show/hide based on menu open state. -->
@@ -63,8 +77,13 @@
 						<a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">About</a>
 					</div>
 					<div class="py-6">
-						<a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Register</a>
-						<a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Sign in</a>
+						{#if user}
+							<a href={`/users/${user.id}`} class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">My profile</a>
+							<button onclick={signOut} class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Sign out</button>
+						{:else}
+							<a href="/register" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Register</a>
+							<a href="/sign-in" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Sign in</a>
+						{/if}
 					</div>
 				</div>
 			</div>
