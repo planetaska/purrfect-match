@@ -6,7 +6,7 @@
 	function toggleMobileMenu() { showMobileMenu = !showMobileMenu }
 </script>
 
-<header class="absolute inset-x-0 top-0 z-50 sticky">
+<header class="sticky inset-x-0 top-0 z-50 bg-white glass">
 	<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
 		<div class="flex lg:flex-1">
 			<a href="/" class="-m-1.5 p-1.5 text-blue-300 flex items-center gap-x-2">
@@ -32,8 +32,8 @@
 			<a href="#" class="text-sm/6 font-semibold text-gray-900">About</a>
 		</div>
 		<div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-8">
-			<a href="#" class="text-sm/6 font-semibold text-gray-900">Sign up</a>
-			<a href="#" class="text-sm/6 font-semibold text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
+			<a href="/register" class="text-sm/6 font-semibold text-gray-900">Register</a>
+			<a href="/sign-in" class="text-sm/6 font-semibold text-gray-900">Sign in <span aria-hidden="true">&rarr;</span></a>
 		</div>
 	</nav>
 	<!-- Mobile menu, show/hide based on menu open state. -->
@@ -63,8 +63,8 @@
 						<a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">About</a>
 					</div>
 					<div class="py-6">
-						<a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Sign up</a>
-						<a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Log in</a>
+						<a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Register</a>
+						<a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Sign in</a>
 					</div>
 				</div>
 			</div>

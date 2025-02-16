@@ -7,7 +7,7 @@
 	let { children } = $props();
 </script>
 
-<div class="bg-white">
+<div class="min-h-dvh flex flex-col">
 	<MainNav />
 
 	{@render children()}
