@@ -10,8 +10,7 @@
 	let { children } = $props();
 
 	export let data;
-	// import { props } from '$props';
-	// const { data } = props;
+	// let data = $props();
 
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
