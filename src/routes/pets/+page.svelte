@@ -12,6 +12,9 @@
 
 <div>
 	This page should contain the pets category select.
+	<br>
+	Remember in SvelteKit, a directory inside /src/routes is a route,
+	and the +page.svelte file inside the directory is the route's page component.
 </div>
 
 <!-- Example -->
