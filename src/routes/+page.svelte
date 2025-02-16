@@ -23,9 +23,12 @@
 							<span class="font-medium italic">Find your perfect companion, not just any pet.</span>
 							Every pet deserves their perfect human, and every human deserves their perfect pet. At Purrfect Match, we've reimagined pet adoption by focusing on what truly matters – compatibility.
 						</p>
-						<div class="mt-10 flex items-center gap-x-6">
+						<div class="mt-10 flex items-center gap-x-2">
+							<label class="input">
+								<svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
+								<input type="search" class="grow" placeholder="Zip code" />
+							</label>
 							<a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
-							<a href="/sign-in" class="text-sm/6 font-semibold text-gray-900">Sign in <span aria-hidden="true">→</span></a>
 						</div>
 					</div>
 					<div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
