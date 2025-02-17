@@ -1,5 +1,5 @@
 <script lang="ts">
-	// Just an example, suppose we have page data loaded from +page.ts:
+	// Just an example, suppose we have page data loaded from +page.server.ts:
 	//
 	// import type { PageProps } from './$types';
 	// let { data }: PageProps = $props();

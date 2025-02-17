@@ -1,3 +1,8 @@
+<script lang="ts">
+	import { page } from '$app/state';
+	const message = page.url.searchParams.get('message')
+</script>
+
 <div class="flex grow">
 	<div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
 		<div class="mx-auto w-full max-w-sm lg:w-96">
@@ -14,7 +19,7 @@
 
 			<div class="mt-10">
 				<div>
-					<form action="#" method="POST" class="space-y-6">
+					<form action="/auth?/sign_in" method="POST" class="space-y-6">
 						<div>
 							<label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
 							<div class="mt-2">
