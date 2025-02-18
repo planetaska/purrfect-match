@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { blur } from 'svelte/transition'
+	import { onMount } from 'svelte';
 
 	let { supabase, user } = $props();
 	let showMobileMenu = $state(false)
-	let is_dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	let is_dark = $state(false)
+
+	onMount(() => {
+		is_dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	});
 
 	function toggleMobileMenu() { showMobileMenu = !showMobileMenu }
 	function toggleTheme() {
