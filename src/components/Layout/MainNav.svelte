@@ -4,21 +4,23 @@
 
 	let { supabase, user } = $props();
 	let showMobileMenu = $state(false)
-	let is_dark = $state(false)
-
-	onMount(() => {
-		is_dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-	});
+	// let is_dark = false
+	//
+	// onMount(() => {
+	// 	is_dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	// });
 
 	function toggleMobileMenu() { showMobileMenu = !showMobileMenu }
-	function toggleTheme() {
-		is_dark = !is_dark
-		if (is_dark) {
-			document.documentElement.classList.add('dark')
-		} else {
-			document.documentElement.classList.remove('dark')
-		}
-	}
+
+	// Turns out we don't need Tailwind's dark mode and can use Daisy's colors
+	//function toggleTheme() {
+		// is_dark = !is_dark
+		// if (is_dark) {
+		// 	document.documentElement.classList.add('dark')
+		// } else {
+		// 	document.documentElement.classList.remove('dark')
+		// }
+	//}
 
 	// handles users sign out through Supabase
 	const signOut = async () => {
@@ -29,7 +31,7 @@
 	}
 </script>
 
-<header class="sticky inset-x-0 top-0 z-50 bg-white dark:bg-gray-950 glass">
+<header class="sticky bg-base-100 inset-x-0 top-0 z-50 glass">
 	<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
 		<div class="flex lg:flex-1">
 			<a href="/" class="-m-1.5 p-1.5 text-blue-300 flex items-center gap-x-2">
@@ -58,7 +60,7 @@
 			<div>
 				<label class="swap swap-rotate">
 					<!-- this hidden checkbox controls the state -->
-					<input type="checkbox" class="theme-controller" value="dark" onchange={toggleTheme} />
+					<input type="checkbox" class="theme-controller" value="dark" />
 
 					<!-- sun icon -->
 					<svg
