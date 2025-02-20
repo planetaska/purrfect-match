@@ -1,26 +1,21 @@
-import { API_KEY, API_SECRET } from '$env/static/private';
-import type { PageServerLoad } from '@sveltejs/kit'; //'./$types';
+import type { PageServerLoad } from './$types'; //'@sveltejs/kit'; //
 
-export const load: PageServerLoad = async ({ fetch, params }) => {
+export const load: PageServerLoad = async ({ fetch, params, parent }) => {
 	try {
-		// Step 1: Obtain Access Token using your API Key and Secret
-		const tokenRes = await fetch('https://api.petfinder.com/v2/oauth2/token', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: new URLSearchParams({
-				grant_type: 'client_credentials', // OAuth grant type for public access
-				client_id: API_KEY, // Your API Key
-				client_secret: API_SECRET // Your API Secret
-			})
-		});
+		const { accessToken } = await parent();
 
-		const tokenData = await tokenRes.json();
-		const accessToken = tokenData.access_token;
-
-		const res = await fetch(`https://api.petfinder.com/v2/types`, {
-			//?type=cat&type=dog`
+		const page = ''; //params.page;
+		let url = '';
+		if (accessToken) {
+			if (page) {
+				// url = `https://api.petfinder.com/v2/animals?type=Dog&type=Cat&page=${page}`;
+				url = `https://api.petfinder.com/v2/types?page=${page}`;
+			} else {
+				// url = `https://api.petfinder.com/v2/animals?type=Dog&type=Cat&page=1`;
+				url = `https://api.petfinder.com/v2/types?page=1`;
+			}
+		}
+		const res = await fetch(url, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -29,9 +24,9 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 		});
 
 		const data = await res.json();
-		console.log(data);
+		// console.log(data);
 		return {
-			//props: { types: data.animals }
+			// props: { types: data.animals }
 			props: { types: data.types }
 		};
 	} catch (error) {
