@@ -10,15 +10,19 @@
 	// });
 </script>
 
-<div>
-	This page should contain the pets category select.
-	<br />
-	Remember in SvelteKit, a directory inside /src/routes is a route, and the +page.svelte file inside
-	the directory is the route's page component.
-</div>
+<div class="text-gray-900">
+	<div>
+		This page should contain the pets category select.
+		<br />
+		Remember in SvelteKit, a directory inside /src/routes is a route, and the +page.svelte file inside
+		the directory is the route's page component.
+	</div>
 
-<!-- Example -->
-{#each data.props.types as pet}
-	<!-- <div>Pet type: {pet.type}, Name: {pet.name}</div> -->
-	<div>Pet type: {pet.name}</div>
-{/each}
+	<!-- Example -->
+	{#each data.props.types as pet}
+		<!-- <div>Pet type: {pet.type}, Name: {pet.name}</div> -->
+		{#if pet.name == 'Cat' || pet.name == 'Dog'}
+			<div>Pet type: {pet.name}</div>
+		{/if}
+	{/each}
+</div>
