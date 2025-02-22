@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { PageData } from '../../../../.svelte-kit/types/src/routes'
+	import type { PageProps } from './$types';
 
-	let { data } = $props()
+	let { data }: PageProps = $props()
 	let { profile, supabase, user } = $derived(data)
 </script>
 
 <h1>Profile page for user: {user?.email}</h1>
 <p>Location: {profile.location}</p>
+<p>Admin: {profile.admin}</p>

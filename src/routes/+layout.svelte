@@ -13,7 +13,7 @@
 		Set up a listener for Auth events on the client, to handle session refreshes and signouts.
 	 */
 	let { data, children } = $props()
-	let { session, supabase, user } = $derived(data)
+	let { session, supabase, user, profile } = $derived(data)
 
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
@@ -27,7 +27,7 @@
 </script>
 
 <div class="min-h-dvh flex flex-col">
-	<MainNav {supabase} {user} />
+	<MainNav {supabase} {user} {profile} />
 
 	{@render children()}
 </div>
