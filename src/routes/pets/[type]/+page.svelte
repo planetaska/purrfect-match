@@ -13,5 +13,7 @@
 </div>
 
 {#each data.props.animal as pet}
-	<div>Pet type: {pet.type}, Name: {pet.name}, Breed: {pet.breeds['primary']}</div>
+	<div>
+		Pet type: {pet.type}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
+	</div>
 {/each}
