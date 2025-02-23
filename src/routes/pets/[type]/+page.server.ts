@@ -9,7 +9,7 @@ export const actions = {
 
 		console.log(`type: ${type}`);
 		if (type) {
-			return redirect(303, `/pets/${type}?zipcode=${zip}`);
+			return redirect(303, `/pets/${type}?location=${zip}`);
 		}
 	}
 };
@@ -17,7 +17,7 @@ export const actions = {
 export const load: PageServerLoad = async ({ fetch, params, parent, url }) => {
 	try {
 		const { accessToken } = await parent();
-		const zip = url.searchParams.get('zipcode');
+		const zip = url.searchParams.get('location');
 		const { type } = params;
 
 		console.log(`zip is: ${zip}, type is ${type}`);
