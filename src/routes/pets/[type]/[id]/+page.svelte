@@ -11,8 +11,9 @@
 	123 is the id of the dog.
 </div>
 
-{#each data.props.animal as pet}
-	<div>
-		Pet type: {pet.type}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
-	</div>
-{/each}
+<!-- {#each data.props.animal as pet} -->
+<div>
+	Pet type: {data.props.animal.type}, ID: {data.props.animal.id}, Name: {data.props.animal.name},
+	Breed: {data.props.animal.breeds['primary']}
+</div>
+<!-- {/each} -->
