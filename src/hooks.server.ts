@@ -78,12 +78,18 @@ const authGuard: Handle = async ({ event, resolve }) => {
 	event.locals.session = session
 	event.locals.user = user
 
-	if (!event.locals.session && event.url.pathname.startsWith('/private')) {
-		redirect(303, '/auth')
+	// Bounce unauthenticated users accessing /uses route
+	if (!event.locals.session && event.url.pathname.startsWith('/users')) {
+		redirect(303, '/sign-in')
+	}
+
+	// Block users from accessing /uses route
+	if (event.locals.session && event.url.pathname === '/users') {
+		redirect(303, '/')
 	}
 
 	if (event.locals.session && event.url.pathname === '/auth') {
-		redirect(303, '/private')
+		redirect(303, '/')
 	}
 
 	return resolve(event)

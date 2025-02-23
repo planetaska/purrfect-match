@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { blur } from 'svelte/transition'
-	import { onMount } from 'svelte';
+	// import { onMount } from 'svelte';
 
-	let { supabase, user } = $props();
+	let { supabase, user, profile } = $props();
 	let showMobileMenu = $state(false)
 	// let is_dark = false
 	//
@@ -31,7 +31,7 @@
 	}
 </script>
 
-<header class="sticky bg-base-100 inset-x-0 top-0 z-50 glass">
+<header class="sticky bg-base-100 inset-x-0 top-0 z-50">
 	<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
 		<div class="flex lg:flex-1">
 			<a href="/" class="-m-1.5 p-1.5 text-blue-300 flex items-center gap-x-2">
@@ -82,8 +82,26 @@
 				</label>
 			</div>
 			{#if user}
-				<a href={`/users/${user.id}`} class="text-sm/6 font-semibold text-gray-900">My profile</a>
-				<button onclick={signOut} class="cursor-pointer text-sm/6 font-semibold text-gray-900">Sign out</button>
+				<div class="dropdown dropdown-end">
+					<div tabindex="0" role="button" class="avatar avatar-placeholder cursor-pointer">
+						<div class="bg-neutral text-neutral-content w-8 rounded-full">
+							<span class="text-xs">{profile.full_name.slice(0,1)}</span>
+						</div>
+					</div>
+					<ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+						<li><a href={`/users/${user.id}`}>My profile</a></li>
+						<li><button onclick={signOut}>Sign out</button></li>
+					</ul>
+				</div>
+<!--				<details class="dropdown dropdown-end">-->
+<!--					<summary class="inline-flex cursor-pointer size-6 items-center justify-center rounded-full bg-neutral text-neutral-content">-->
+<!--						<span class="text-xs font-medium text-white">{profile.full_name.slice(0,1)}</span>-->
+<!--					</summary>-->
+<!--					<ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">-->
+<!--						<li><a href={`/users/${user.id}`}>My profile</a></li>-->
+<!--						<li><button onclick={signOut}>Sign out</button></li>-->
+<!--					</ul>-->
+<!--				</details>-->
 			{:else}
 				<a href="/register" class="text-sm/6 font-semibold text-gray-900">Register</a>
 				<a href="/sign-in" class="text-sm/6 font-semibold text-gray-900">Sign in <span aria-hidden="true">&rarr;</span></a>
