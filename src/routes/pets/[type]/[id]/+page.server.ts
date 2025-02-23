@@ -5,7 +5,7 @@ export const load: PageServerLoad = async ({ fetch, params, parent }) => {
 		const { accessToken } = await parent();
 		const { type, id } = params;
 
-		const res = await fetch(`https://api.petfinder.com/v2/animals?type=${type}&location=${id}`, {
+		const res = await fetch(`https://api.petfinder.com/v2/animals/${id}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ fetch, params, parent }) => {
 		const data = await res.json();
 		console.log(data);
 		return {
-			props: { animal: data.animals }
+			props: { animal: data.animal }
 		};
 	} catch (error) {
 		console.error(`Error retreiving pets: ${error}`);
