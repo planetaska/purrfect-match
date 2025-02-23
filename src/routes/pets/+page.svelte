@@ -19,10 +19,17 @@
 	</div>
 
 	<!-- Example -->
+
 	{#each data.props.types as pet}
 		<!-- <div>Pet type: {pet.type}, Name: {pet.name}</div> -->
-		{#if pet.name == 'Cat' || pet.name == 'Dog'}
-			<div>Pet type: {pet.name}</div>
-		{/if}
+		<!-- {#if pet.name == 'Cat' || pet.name == 'Dog'}
+			<div>Pet type: {pet.name}</div> -->
+		<!-- {/if} -->
+		<form method="POST" action="/pets/type">
+			<!-- Pass zipcode here -->
+			<input type="hidden" name="zipcode" value={data.props.zip} />
+			<input type="hidden" name="type" value={pet.name} />
+			<button type="submit">{pet.name}</button>
+		</form>
 	{/each}
 </div>
