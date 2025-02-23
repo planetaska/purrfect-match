@@ -1,12 +1,12 @@
 <main>
 	<div class="relative isolate">
-		<svg class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]" aria-hidden="true">
+		<svg class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-base-content/10 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]" aria-hidden="true">
 			<defs>
 				<pattern id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
 					<path d="M.5 200V.5H200" fill="none" />
 				</pattern>
 			</defs>
-			<svg x="50%" y="-1" class="overflow-visible fill-gray-50">
+			<svg x="50%" y="-1" class="overflow-visible fill-base-100">
 				<path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0" />
 			</svg>
 			<rect width="100%" height="100%" stroke-width="0" fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" />
@@ -18,8 +18,8 @@
 			<div class="mx-auto max-w-7xl px-6 pt-36 pb-32 sm:pt-60 lg:px-8 lg:pt-32">
 				<div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
 					<div class="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
-						<h1 class="text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl">Because every happy tail begins with the right match.</h1>
-						<p class="mt-8 text-lg font-light text-pretty text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
+						<h1 class="text-5xl font-semibold tracking-tight text-pretty text-base-content sm:text-7xl">Because every happy tail begins with the right match.</h1>
+						<p class="mt-8 text-lg font-light text-pretty text-base-content sm:max-w-md sm:text-xl/8 lg:max-w-none">
 							<span class="font-medium italic">Find your perfect companion, not just any pet.</span>
 							Every pet deserves their perfect human, and every human deserves their perfect pet. At Purrfect Match, we've reimagined pet adoption by focusing on what truly matters – compatibility.
 						</p>
@@ -28,7 +28,7 @@
 								<svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
 								<input type="search" class="grow" placeholder="Zip code" />
 							</label>
-							<a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
+							<a href="/match" class="btn btn-primary">Get started</a>
 						</div>
 					</div>
 					<div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">

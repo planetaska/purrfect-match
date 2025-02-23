@@ -26,7 +26,7 @@
 	})
 </script>
 
-<div class="min-h-dvh flex flex-col">
+<div class="min-h-dvh flex flex-col bg-base-100">
 	<MainNav {supabase} {user} {profile} />
 
 	{@render children()}
