@@ -1,3 +1,11 @@
+<script lang="ts">
+	// import SuperDebug from 'sveltekit-superforms';
+	import { superForm } from 'sveltekit-superforms';
+
+	const { super_form } = $props()
+	const { form, errors, constraints, message, enhance } = superForm(super_form);
+</script>
+
 <!-- Settings forms -->
 <div class="divide-y divide-base-content/8 bg-base-200">
 	<div class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
@@ -6,7 +14,9 @@
 			<p class="mt-1 text-sm/6 text-base-content">These information will not be shared with others, and we do not intend to collect your personal information for other purposes.</p>
 		</div>
 
-		<form class="md:col-span-2">
+		<form method="POST" class="md:col-span-2" use:enhance>
+			{#if $message}<h3>{$message}</h3>{/if}
+<!--			<SuperDebug data={$form} />-->
 			<div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
 				<!-- Saved for later if we decided to add user avatars -->
 				<!--						<div class="col-span-full flex items-center gap-x-8">-->
@@ -20,21 +30,28 @@
 				<div class="sm:col-span-3">
 					<label for="first-name" class="block text-sm/6 font-medium text-baes-content">Full name</label>
 					<div class="mt-2">
-						<input type="text" name="first-name" id="first-name" autocomplete="given-name" class="input w-full">
+						<input type="text" bind:value={$form.full_name}
+									 aria-invalid={$errors.full_name ? 'true' : undefined} {...$constraints.full_name}
+									 name="full_name" id="full_name" autocomplete="given-name" class="input w-full">
+						{#if $errors.full_name}<span class="invalid">{$errors.full_name}</span>{/if}
 					</div>
 				</div>
 
 				<div class="col-span-full">
 					<label for="email" class="block text-sm/6 font-medium text-baes-content">Email address</label>
 					<div class="mt-2">
-						<input id="email" name="email" type="email" autocomplete="email" class="input w-full">
+						<input id="email" bind:value={$form.email}
+									 aria-invalid={$errors.email ? 'true' : undefined} {...$constraints.email}
+									 name="email" type="email" autocomplete="email" class="input w-full">
 					</div>
 				</div>
 
 				<div class="sm:col-span-3">
 					<label for="first-name" class="block text-sm/6 font-medium text-baes-content">Location</label>
 					<div class="mt-2">
-						<input type="text" name="location" id="location" autocomplete="postal-code" class="input w-full">
+						<input type="text" bind:value={$form.location}
+									 aria-invalid={$errors.location ? 'true' : undefined} {...$constraints.location}
+									 name="location" id="location" autocomplete="postal-code" class="input w-full">
 					</div>
 				</div>
 			</div>
