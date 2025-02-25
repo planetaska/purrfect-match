@@ -5,7 +5,7 @@
 	import PreferencesForm from '$components/Form/PreferencesForm.svelte';
 
 	let { data }: PageProps = $props()
-	let { profile, supabase, user } = $derived(data)
+	// let { supabase, user } = $derived(data)
 </script>
 
 <main class="px-4">
@@ -14,7 +14,7 @@
 	<div class="tabs tabs-border">
 		<input type="radio" name="user_tabs" class="tab" aria-label="Account Info" checked />
 		<div class="tab-content rounded-md overflow-hidden">
-			<AccountForm />
+			<AccountForm super_form={data.account_form} />
 		</div>
 
 		<input type="radio" name="user_tabs" class="tab" aria-label="Pet Preferences" />
