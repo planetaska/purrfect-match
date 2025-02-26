@@ -57,7 +57,7 @@ export const actions = {
 			return fail(400, { form });
 		}
 
-		// Updating data
+		// Updating profile
 		const { data, error } = await supabase
 			.from('profiles')
 			.update({
@@ -70,6 +70,23 @@ export const actions = {
 		if (error) {
 			console.error(error)
 			return fail(500, { error })
+		}
+
+		// Updating email
+		// Email is treated differently on Supabase managed auth accounts.
+		// Sends a "Confirm Email Change" email to the new email address.
+		if (form.data.email !== user?.email) {
+			const { error: email_error } = await supabase.auth.updateUser({
+				email: form.data.email
+			})
+
+			if (email_error) {
+				console.error(email_error)
+				return fail(500, { email_error })
+			} else {
+				// Return the form with a confirmation email sent message
+				return message(form, 'A confirmation email is sent to you.');
+			}
 		}
 
 		// Return the form with a status message
