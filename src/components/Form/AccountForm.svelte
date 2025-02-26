@@ -1,12 +1,15 @@
 <script lang="ts">
-	// import SuperDebug from 'sveltekit-superforms';
 	import { superForm } from 'sveltekit-superforms';
 
-	const { super_form } = $props()
-	const { form, errors, constraints, message, enhance } = superForm(super_form);
+	const { data } = $props()
+
+	const { form, errors, constraints, message, enhance, delayed } = superForm(data, {
+		invalidateAll: false,
+		resetForm: false,
+	});
 </script>
 
-<!-- Settings forms -->
+<!-- User account info forms -->
 <div class="divide-y divide-base-content/8 bg-base-200">
 	<div class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
 		<div>
@@ -14,9 +17,7 @@
 			<p class="mt-1 text-sm/6 text-base-content">These information will not be shared with others, and we do not intend to collect your personal information for other purposes.</p>
 		</div>
 
-		<form method="POST" class="md:col-span-2" use:enhance>
-			{#if $message}<h3>{$message}</h3>{/if}
-<!--			<SuperDebug data={$form} />-->
+		<form method="POST" action="?/account" class="md:col-span-2" use:enhance>
 			<div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
 				<!-- Saved for later if we decided to add user avatars -->
 				<!--						<div class="col-span-full flex items-center gap-x-8">-->
@@ -56,8 +57,12 @@
 				</div>
 			</div>
 
-			<div class="mt-8 flex">
+			<div class="mt-8 flex gap-x-4 items-center">
 				<button type="submit" class="btn btn-primary">Save</button>
+				{#if $delayed}
+					<span class="loading loading-spinner loading-sm text-primary"></span>
+				{/if}
+				{#if $message}<span class="text-success">{$message}</span>{/if}
 			</div>
 		</form>
 	</div>
