@@ -1,4 +1,4 @@
-import { API_KEY, API_SECRET } from '$env/static/private';
+import { PRIVATE_PETFINDER_KEY, PRIVATE_PETFINDER_SECRET } from '$env/static/private';
 import type { PageServerLoad } from './$types'; //'@sveltejs/kit'; //
 
 export const load: PageServerLoad = async () => {
@@ -11,8 +11,8 @@ export const load: PageServerLoad = async () => {
 			},
 			body: new URLSearchParams({
 				grant_type: 'client_credentials',
-				client_id: API_KEY,
-				client_secret: API_SECRET
+				client_id: PRIVATE_PETFINDER_KEY,
+				client_secret: PRIVATE_PETFINDER_SECRET
 			})
 		});
 
