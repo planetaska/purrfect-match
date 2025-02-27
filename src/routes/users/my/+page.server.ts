@@ -89,6 +89,22 @@ export const actions = {
 			}
 		}
 
+		// Updating password
+		// Needs a separate process because Supabase constraints
+		if (form.data.password !== '' && form.data.password_confirm === form.data.password) {
+			const { error: password_error } = await supabase.auth.updateUser({
+				password: form.data.password
+			})
+
+			if (password_error) {
+				console.error(password_error)
+				return fail(500, { password_error })
+			} else {
+				// Return the form with a password update successful message
+				return message(form, 'Password updated successfully!');
+			}
+		}
+
 		// Return the form with a status message
 		return message(form, 'Profile updated successfully!');
 	},

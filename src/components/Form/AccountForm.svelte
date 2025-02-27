@@ -34,7 +34,7 @@
 						<input type="text" bind:value={$form.full_name}
 									 aria-invalid={$errors.full_name ? 'true' : undefined} {...$constraints.full_name}
 									 name="full_name" id="full_name" autocomplete="given-name" class="input w-full">
-						{#if $errors.full_name}<span class="invalid">{$errors.full_name}</span>{/if}
+						{#if $errors.full_name}<span class="validator-hint">{$errors.full_name}</span>{/if}
 					</div>
 				</div>
 
@@ -44,15 +44,37 @@
 						<input id="email" bind:value={$form.email}
 									 aria-invalid={$errors.email ? 'true' : undefined} {...$constraints.email}
 									 name="email" type="email" autocomplete="email" class="input w-full">
+						{#if $errors.email}<span class="validator-hint">{$errors.email}</span>{/if}
 					</div>
 				</div>
 
 				<div class="sm:col-span-3">
+					<label for="password" class="block text-sm/6 font-medium text-baes-content">New password</label>
+					<div class="mt-2">
+						<input id="password" bind:value={$form.password}
+									 aria-invalid={$errors.password ? 'true' : undefined} {...$constraints.password}
+									 name="password" type="password" autocomplete="new-password" class="input w-full">
+						{#if $errors.password}<span class="validator-hint">{$errors.password}</span>{/if}
+					</div>
+				</div>
+
+				<div class="sm:col-span-3">
+					<label for="confirm-password" class="block text-sm/6 font-medium text-baes-content">Confirm password</label>
+					<div class="mt-2">
+						<input id="password_confirm" bind:value={$form.password_confirm}
+									 aria-invalid={$errors.password_confirm ? 'true' : undefined} {...$constraints.password_confirm}
+									 name="password_confirm" type="password" autocomplete="new-password" class="input w-full">
+						{#if $errors.password_confirm}<span class="validator-hint">{$errors.password_confirm}</span>{/if}
+					</div>
+				</div>
+
+				<div class="sm:col-start-1 sm:col-span-3">
 					<label for="first-name" class="block text-sm/6 font-medium text-baes-content">Location</label>
 					<div class="mt-2">
 						<input type="text" bind:value={$form.location}
 									 aria-invalid={$errors.location ? 'true' : undefined} {...$constraints.location}
 									 name="location" id="location" autocomplete="postal-code" class="input w-full">
+						{#if $errors.location}<span class="validator-hint">{$errors.location}</span>{/if}
 					</div>
 				</div>
 			</div>
@@ -63,42 +85,6 @@
 					<span class="loading loading-spinner loading-sm text-primary"></span>
 				{/if}
 				{#if $message}<span class="text-success">{$message}</span>{/if}
-			</div>
-		</form>
-	</div>
-
-	<div class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
-		<div>
-			<h2 class="text-base/7 font-semibold text-baes-content">Change password</h2>
-			<p class="mt-1 text-sm/6 text-baes-content">Update your password associated with your account.</p>
-		</div>
-
-		<form class="md:col-span-2">
-			<div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
-				<div class="col-span-full">
-					<label for="current-password" class="block text-sm/6 font-medium text-baes-content">Current password</label>
-					<div class="mt-2">
-						<input id="current-password" name="current_password" type="password" autocomplete="current-password" class="input w-full">
-					</div>
-				</div>
-
-				<div class="col-span-full">
-					<label for="new-password" class="block text-sm/6 font-medium text-baes-content">New password</label>
-					<div class="mt-2">
-						<input id="new-password" name="new_password" type="password" autocomplete="new-password" class="input w-full">
-					</div>
-				</div>
-
-				<div class="col-span-full">
-					<label for="confirm-password" class="block text-sm/6 font-medium text-baes-content">Confirm password</label>
-					<div class="mt-2">
-						<input id="confirm-password" name="confirm_password" type="password" autocomplete="new-password" class="input w-full">
-					</div>
-				</div>
-			</div>
-
-			<div class="mt-8 flex">
-				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</form>
 	</div>
