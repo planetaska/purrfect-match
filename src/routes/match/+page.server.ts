@@ -6,14 +6,14 @@ export const actions = {
 		const data = await request.formData();
 		const type = data.get('type');
 		const zip = data.get('zipcode');
-		const size = data.get('size');
-        const gender = data.get('age');
-		const age = data.get('size');
-        const children = data.get('children');
-        const dogs = data.get('dogs');
-        const cats = data.get('cats');
+		const size = data.getAll('size');
+		const gender = data.getAll('gender');
+		const age = data.getAll('age');
+		const children = data.get('children');
+		const dogs = data.get('dogs');
+		const cats = data.get('cats');
 
-		console.log(`type: ${type}, zip: ${zip}, size: ${size}, gender: ${gender}
-            children: ${children}, dogs: ${dogs}, cats: ${cats}, age: ${age}`);
+		console.log(`type: ${type}, size: ${size.join(', ')}, gender: ${gender.join(', ')}
+            children: ${children}, dogs: ${dogs}, cats: ${cats}, age: ${age.join(', ')}`);
     }
 };
