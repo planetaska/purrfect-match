@@ -8,7 +8,8 @@ export const actions = {
 		const zip = data.get('zipcode');
 
 		console.log(`type: ${type}`);
-		if (type) {
+		if (type && zip) {
+			//Todo also check if zip exists
 			return redirect(303, `/pets/${type}?location=${zip}`);
 		}
 	}
@@ -37,7 +38,7 @@ export const load: PageServerLoad = async ({ fetch, params, parent, url }) => {
 		const data = await res.json();
 		console.log(data);
 		return {
-			props: { animal: data.animals }
+			props: { animal: data.animals, zip }
 		};
 	} catch (error) {
 		console.error(`Error retreiving pets: ${error}`);
