@@ -26,8 +26,10 @@
 			<!-- <div>Pet type: {pet.name}</div> -->
 
 			<form method="POST" action="/pets/type">
-				<!-- Pass zipcode here -->
-				<input type="hidden" name="zipcode" value={data.props.zip} />
+				<!-- Passing zip if exists -->
+				{#if data.props.zip}
+					<input type="hidden" name="zipcode" value={data.props.zip} />
+				{/if}
 				<input type="hidden" name="type" value={pet.name} />
 				<button type="submit">{pet.name}</button>
 			</form>

@@ -12,6 +12,7 @@
 	Notice the dogs in the url is in plural form, this is a convention to represent a list of items.
 </div>
 
+<p> Pets located near {data.props.zip}</p>
 {#each data.props.animal as pet}
 	<div>
 		Pet type: {pet.type}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
