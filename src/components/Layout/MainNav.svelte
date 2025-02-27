@@ -64,7 +64,7 @@
 			<a href="/match" class="text-sm/6 font-semibold text-base-content">Match for Me</a>
 			<a href="/pets" class="text-sm/6 font-semibold text-base-content">Find Pet</a>
 			{#if user}
-			<a href={`/users/${user.id}/favorites`} class="text-sm/6 font-semibold text-base-content">My Favorites</a>
+			<a href="/users/my/favorites" class="text-sm/6 font-semibold text-base-content">My Favorites</a>
 			{/if}
 			<a href="/about" class="text-sm/6 font-semibold text-base-content">About</a>
 		</div>
@@ -80,7 +80,7 @@
 						</div>
 					</div>
 					<ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-						<li><a href={`/users/${user.id}`}>My profile</a></li>
+						<li><a href="/users/my">My profile</a></li>
 						<li><button onclick={signOut}>Sign out</button></li>
 					</ul>
 				</div>
@@ -125,13 +125,13 @@
 						<a href="/match" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">Match for Me</a>
 						<a href="/pets" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">Find Pet</a>
 						{#if user}
-						<a href={`/users/${user.id}/favorites`} class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">My Favorites</a>
+						<a href="/users/my/favorites" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">My Favorites</a>
 						{/if}
 						<a href="/about" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">About</a>
 					</div>
 					<div class="py-6">
 						{#if user}
-							<a href={`/users/${user.id}`} class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-base-content hover:bg-base-300">My profile</a>
+							<a href="/users/my" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-base-content hover:bg-base-300">My profile</a>
 							<button onclick={signOut} class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-base-content hover:bg-base-300">Sign out</button>
 						{:else}
 							<a href="/register" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-base-content hover:bg-base-300">Register</a>
