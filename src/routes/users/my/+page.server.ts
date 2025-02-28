@@ -2,9 +2,12 @@ import type { PageServerLoad } from './$types';
 
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 // import { z } from 'zod';
 import { accountSchema, prefsSchema } from '$lib/schemas';
+import { createClient } from '@supabase/supabase-js';
+import { PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { PRIVATE_SUPABASE_SERVICE_KEY } from '$env/static/private';
 
 // Moved to $lib/schemas.ts
 // Define outside the load function so the adapter can be cached
@@ -139,5 +142,26 @@ export const actions = {
 
 		// Return the form with a status message
 		return message(form, 'Preferences updated successfully!');
+	},
+	quit: async ({ request, locals: { supabase, user } }) => {
+		console.log('Quitting account: ' + user?.id);
+
+		const supabaseAdmin = createClient(PUBLIC_SUPABASE_URL, PRIVATE_SUPABASE_SERVICE_KEY, {
+			auth: {
+				persistSession: false,
+				autoRefreshToken: false,
+				detectSessionInUrl: false,
+			},
+		})
+
+		const { error: quit_error } = await supabaseAdmin.auth.admin.deleteUser(user?.id)
+
+		if (quit_error) {
+			console.error(quit_error)
+			return fail(500, { quit_error })
+		}
+
+		// Redirect to home
+		redirect(303, '/')
 	}
 };

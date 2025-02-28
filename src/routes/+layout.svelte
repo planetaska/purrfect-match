@@ -6,7 +6,11 @@
 	// Main CSS file
 	import "../app.css";
 
+	import { getFlash } from 'sveltekit-flash-message';
+	import { page } from '$app/state';
+
 	import MainNav from '$components/Layout/MainNav.svelte';
+	import Flash from '$components/Layout/Flash.svelte';
 
 	/*
 		Listen to Auth events
@@ -24,10 +28,16 @@
 
 		return () => data.subscription.unsubscribe()
 	})
+
+	const flash = getFlash(page);
 </script>
 
 <div class="min-h-dvh flex flex-col bg-base-100">
 	<MainNav {supabase} {user} {profile} />
+
+	{#if $flash}
+		<Flash flash={$flash} />
+	{/if}
 
 	{@render children()}
 </div>

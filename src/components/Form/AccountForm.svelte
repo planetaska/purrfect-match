@@ -95,7 +95,7 @@
 			<p class="mt-1 text-sm/6 text-baes-content">No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently.</p>
 		</div>
 
-		<form class="flex items-start md:col-span-2">
+		<form method="POST" action="?/quit" class="flex items-start md:col-span-2">
 			<button type="submit" class="btn btn-secondary">Yes, delete my account</button>
 		</form>
 	</div>
