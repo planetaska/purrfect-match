@@ -12,7 +12,7 @@
 	let cats = $state();
 </script>
 
-<form method="POST" action="/pets/type">
+<form method="POST" action="pets/type?form=filter">
     <p>Let us know a little more about you</p> 
     <label for="type">Type:</label>
     <select id="type" name="type">
@@ -100,6 +100,7 @@
 <p> Pets located near {data.props.zip}</p>
 {#each data.props.animal as pet}
 	<div>
-		Pet type: {pet.type}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
+		ID: {pet.id}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
+	    <a href={`/pets/type/${pet.id}`}>View Pet Details</a>
 	</div>
 {/each}
