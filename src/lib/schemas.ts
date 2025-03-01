@@ -10,8 +10,8 @@ export const accountSchema = z.object({
 	{ message: 'Passwords do not match', path: ["password_confirm"] });
 
 export const prefsSchema = z.object({
-	size: z.string(),
-	age: z.string(),
+	size: z.string().array(),
+	age: z.string().array(),
 	gender: z.string(),
 	coat: z.string(),
 	env_children: z.boolean(),

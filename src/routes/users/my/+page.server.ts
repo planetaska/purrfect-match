@@ -3,30 +3,12 @@ import type { PageServerLoad } from './$types';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { fail, redirect } from '@sveltejs/kit';
-// import { z } from 'zod';
+
+// Form schemas moved to $lib/schemas.ts
 import { accountSchema, prefsSchema } from '$lib/schemas';
 import { createClient } from '@supabase/supabase-js';
 import { PUBLIC_SUPABASE_URL } from '$env/static/public';
 import { PRIVATE_SUPABASE_SERVICE_KEY } from '$env/static/private';
-
-// Moved to $lib/schemas.ts
-// Define outside the load function so the adapter can be cached
-// const accountSchema = z.object({
-// 	full_name: z.string().min(2).max(64),
-// 	email: z.string().email(),
-// 	// password: z.string().min(6).max(32),
-// 	location: z.string().min(5).max(10),
-// });
-//
-// const prefsSchema = z.object({
-// 	size: z.string(),
-// 	age: z.string(),
-// 	gender: z.string(),
-// 	coat: z.string(),
-// 	env_children: z.boolean(),
-// 	env_dogs: z.boolean(),
-// 	env_cats: z.boolean(),
-// });
 
 // Load function
 export const load: PageServerLoad = async ({ depends, locals: { supabase, user } }) => {

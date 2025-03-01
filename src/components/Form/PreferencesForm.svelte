@@ -6,6 +6,11 @@
 		invalidateAll: false,
 		resetForm: false,
 	});
+
+	const size_options = ['Small', 'Medium', 'Large', 'Extra Large']
+	const age_options = ['Baby', 'Young', 'Adult', 'Senior']
+	const coat_options = ['Hairless', 'Short', 'Medium', 'Long', 'Wire', 'Curly']
+
 </script>
 
 <!-- User preferences forms -->
@@ -21,34 +26,34 @@
 		<form method="POST" action="?/prefs" class="md:col-span-2" use:enhance>
 			<div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
 				<div class="sm:col-span-3">
-					<label for="size" class="block text-sm/6 font-medium text-baes-content">Size</label>
-					<div class="mt-2">
-						<select name="size" id="size" bind:value={$form.size} class="select">
-							<option></option>
-							<option>Small</option>
-							<option>Medium</option>
-							<option>Large</option>
-							<option>Extra Large</option>
-						</select>
-					</div>
+					<fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64">
+						<legend class="fieldset-legend text-sm/6">Size</legend>
+						{#each size_options as size}
+						<label class="fieldset-label text-sm/6 text-base-content">
+							<input type="checkbox" bind:group={$form.size} name="size" value="{size}" class="checkbox" />
+							{size}
+						</label>
+						{/each}
+					</fieldset>
 				</div>
 
 				<div class="sm:col-span-3">
-					<label for="age" class="block text-sm/6 font-medium text-baes-content">Age</label>
-					<div class="mt-2">
-						<select name="age" id="age" bind:value={$form.age} class="select">
-							<option>Kitten</option>
-							<option>Young</option>
-							<option>Adult</option>
-							<option>Senior</option>
-						</select>
-					</div>
+					<fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64">
+						<legend class="fieldset-legend text-sm/6">Age</legend>
+						{#each age_options as age}
+							<label class="fieldset-label text-sm/6 text-base-content">
+								<input type="checkbox" bind:group={$form.age} name="age" value="{age}" class="checkbox" />
+								{age}
+							</label>
+						{/each}
+					</fieldset>
 				</div>
 
 				<div class="sm:col-span-3">
 					<label for="gender" class="block text-sm/6 font-medium text-baes-content">Gender</label>
 					<div class="mt-2">
 						<select name="gender" id="gender" bind:value={$form.gender} class="select">
+							<option value="">No preference</option>
 							<option>Male</option>
 							<option>Female</option>
 						</select>
@@ -59,10 +64,10 @@
 					<label for="coat" class="block text-sm/6 font-medium text-baes-content">Coat</label>
 					<div class="mt-2">
 						<select name="coat" id="coat" bind:value={$form.coat} class="select">
-							<option>Hairless</option>
-							<option>Short</option>
-							<option>Medium</option>
-							<option>Long</option>
+							<option value="">No preference</option>
+							{#each coat_options as coat}
+								<option>{coat}</option>
+							{/each}
 						</select>
 					</div>
 				</div>
