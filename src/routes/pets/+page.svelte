@@ -10,7 +10,7 @@
 	// });
 </script>
 
-<div class="text-gray-900">
+<div >
 	<div>
 		This page should contain the pets category select.
 		<br />
