@@ -25,7 +25,7 @@
 		{#if pet.name == 'Cat' || pet.name == 'Dog'}
 			<!-- <div>Pet type: {pet.name}</div> -->
 
-			<form method="POST" action="/pets/type">
+			<form method="POST" action="/pets/type?form=category">
 				<!-- Passing zip if exists -->
 				{#if data.props.zip}
 					<input type="hidden" name="zipcode" value={data.props.zip} />
