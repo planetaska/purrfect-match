@@ -3,12 +3,13 @@
 	Form actions: register, sign_in
  */
 
-import { redirect } from '@sveltejs/kit'
+// import { redirect } from '@sveltejs/kit'
+import { redirect } from 'sveltekit-flash-message/server'
 
 import type { Actions } from './$types'
 
 export const actions: Actions = {
-	register: async ({ request, locals: { supabase } }) => {
+	register: async ({ request, cookies, locals: { supabase } }) => {
 		const formData = await request.formData()
 		const email = formData.get('email') as string
 		const password = formData.get('password') as string
@@ -30,10 +31,10 @@ export const actions: Actions = {
 			console.error(error)
 			redirect(303, '/auth/error')
 		} else {
-			redirect(303, '/')
+			redirect(303, '/', { type: 'success', message: "Registration successful!" }, cookies)
 		}
 	},
-	sign_in: async ({ request, locals: { supabase } }) => {
+	sign_in: async ({ request, cookies, locals: { supabase } }) => {
 		const formData = await request.formData()
 		const email = formData.get('email') as string
 		const password = formData.get('password') as string
@@ -43,7 +44,7 @@ export const actions: Actions = {
 			console.error(error)
 			redirect(303, '/auth/error?message=' + error.code)
 		} else {
-			redirect(303, '/')
+			redirect(303, '/', { type: 'success', message: "Welcome back!" }, cookies)
 		}
 	},
 }
