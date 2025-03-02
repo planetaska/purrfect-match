@@ -90,20 +90,22 @@
         <input type="radio" id="false" name="cats" value = "false"  bind:group={cats}/>
         <label for="false">No</label>
     </fieldset>
-
-    <div>
-      <input type="submit" value="Submit" />
-      <input type="reset" value="Reset" />
-    </div>
-  </form>
-
-{#if data.props.zip}
-	<p> Pets located near {data.props.zip}</p>
-{/if}
-
-{#each data.props.animal as pet}
+	
 	<div>
-		ID: {pet.id}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
-	    <a href={`/pets/type/${pet.id}`}>View Pet Details</a>
-	</div>
-{/each}
+		<input type="submit" value="Submit" />
+		<input type="reset" value="Reset" />
+	  </div>
+</form>
+
+{#if data.props}
+	{#if data.props.zip}
+		<p> Pets located near {data.props.zip}</p>
+	{/if}
+
+	{#each data.props.animal as pet}
+		<div>
+			ID: {pet.id}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
+			<a href={`/pets/type/${pet.id}`}>View Pet Details</a>
+		</div>
+	{/each}
+{/if}

@@ -1,19 +1,6 @@
 import type { PageServerLoad } from './$types'; //'@sveltejs/kit'; //
 import { redirect } from '@sveltejs/kit';
 
-export const actions = {
-	default: async ({ request }) => {
-		const data = await request.formData();
-		const zipcode = data.get('zipcode');
-
-		console.log(`Zip Code: ${zipcode}`);
-
-		if (zipcode) {
-			return redirect(303, `/pets?location=${zipcode}`);
-		}
-	}
-};
-
 export const load: PageServerLoad = async ({ fetch, params, parent, url }) => {
 	try {
 		const { accessToken } = await parent();
