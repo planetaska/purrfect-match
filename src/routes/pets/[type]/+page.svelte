@@ -14,6 +14,10 @@
 
 <form method="POST" action="/pets/type">
     <p>Let us know a little more about you</p> 
+
+	<label for="location">Zipcode</label>
+	<input type="input" id="location" name="location" bind:value={data.props.zip}/>
+
     <label for="type">Type:</label>
     <select id="type" name="type">
         <option value="Dog">Dog</option>
@@ -23,16 +27,16 @@
     
     <fieldset>
       <legend>What size pet are you looking for?</legend>
-      <input type="checkbox" id="small" name="size" value = small  bind:group={size}/>
+      <input type="checkbox" id="small" name="size" value = "small"  bind:group={size}/>
       <label for="small">Small</label>
 
-      <input type="checkbox" id="medium" name="size" value = medium  bind:group={size} />
+      <input type="checkbox" id="medium" name="size" value = "medium"  bind:group={size} />
       <label for="medium">Medium</label>
 
-      <input type="checkbox" id="Large" name="size" value = large  bind:group={size}/>
+      <input type="checkbox" id="Large" name="size" value = "large"  bind:group={size}/>
       <label for="large">Large</label>
     
-      <input type="checkbox" id="X-Large" name="size" value = xlarge  bind:group={size}/>
+      <input type="checkbox" id="X-Large" name="size" value = "xlarge"  bind:group={size}/>
       <label for="x-large">X-Large</label>
     </fieldset>
 
