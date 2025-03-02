@@ -1,38 +1,35 @@
 <script lang="ts">
-	// Just an example, suppose we have page data loaded from +page.server.ts:
-	//
 	import type { PageProps } from './$types';
 	let { data }: PageProps = $props();
-	//
-	// You don't need this, but if you wanted to confirm data is loaded:
-	// onMount(() => {
-	// 	console.log('Pets loaded: ' + data.pets);
-	// });
 </script>
 
-<div class="text-gray-900">
-	<div>
-		This page should contain the pets category select.
-		<br />
-		Remember in SvelteKit, a directory inside /src/routes is a route, and the +page.svelte file inside
-		the directory is the route's page component.
-	</div>
-
-	<!-- Example -->
-
-	{#each data.props.types as pet}
-		<!-- <div>Pet type: {pet.type}, Name: {pet.name}</div> -->
-		{#if pet.name == 'Cat' || pet.name == 'Dog'}
-			<!-- <div>Pet type: {pet.name}</div> -->
-
-			<form method="POST" action="/pets/type">
-				<!-- Passing zip if exists -->
-				{#if data.props.zip}
-					<input type="hidden" name="zipcode" value={data.props.zip} />
+<div >
+	{#if data.props}
+		{#each data.props.types as pet}
+			{#if data.props.zip}
+				{#if pet.name == 'Cat'} 
+					<div>
+						<a href="pets/cat?location={data.props.zip}"> Cat</a>
+					</div>
 				{/if}
-				<input type="hidden" name="type" value={pet.name} />
-				<button type="submit">{pet.name}</button>
-			</form>
-		{/if}
-	{/each}
+				
+				{#if pet.name == 'Dog'}
+					<div>
+						<a href="pets/dog?location={data.props.zip}"> Dog</a>
+					</div>
+				{/if}
+			{:else}
+				{#if pet.name == 'Cat'} 
+					<div>
+						<a href="pets/cat"> Cat</a>
+					</div>
+				{/if}
+				{#if pet.name == 'Dog'}
+					<div>
+						<a href="pets/dog"> Dog</a>
+					</div>
+				{/if}
+			{/if}
+		{/each}
+	{/if}
 </div>
