@@ -3,36 +3,22 @@ import type { PageServerLoad } from './$types'; //'@sveltejs/kit'; //
 
 export const actions = {
 	default: async ({ request }) => {
-		const url = new URL(request.url);
-		const formType = url.searchParams.get('form'); // Get the 'form' query parameter
+		// const url = new URL(request.url);
+		console.log('Request URL:', request.url); // This will help track where it's posting
 
 		const data = await request.formData();
 
-		if (formType === 'category') {
-			// const data = await request.formData();
-			const type = data.get('type');
-			const zip = data.get('zipcode');
+		const type = data.get('type');
+		const zip = data.get('zipcode');
+		const size = data.getAll('size');
+		const gender = data.getAll('gender');
+		const age = data.getAll('age');
+		const children = data.get('children');
+		const dogs = data.get('dogs');
+		const cats = data.get('cats');
 
-			console.log(`type: ${type}`);
-			if (!zip) {
-				return redirect(303, `/pets/${type}`);
-			}
-			return redirect(303, `/pets/${type}?location=${zip}`);
-		} else if (formType == 'filter') {
-			// filter: async ({ request }) => {
-			// const data = await request.formData();
-			const type = data.get('type');
-			const zip = data.get('zipcode');
-			const size = data.getAll('size');
-			const gender = data.getAll('gender');
-			const age = data.getAll('age');
-			const children = data.get('children');
-			const dogs = data.get('dogs');
-			const cats = data.get('cats');
-
-			console.log(`type: ${type}, size: ${size.join(', ')}, gender: ${gender.join(', ')}
-				children: ${children}, dogs: ${dogs}, cats: ${cats}, age: ${age.join(', ')}`);
-		}
+		console.log(`type: ${type}, size: ${size.join(', ')}, gender: ${gender.join(', ')}
+			children: ${children}, dogs: ${dogs}, cats: ${cats}, age: ${age.join(', ')}`);
 	}
 };
 
