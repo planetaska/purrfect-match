@@ -12,7 +12,7 @@
 	let cats = $state();
 </script>
 
-<form method="POST" action="pets/type?form=filter">
+<form method="POST" action="/pets/type">
     <p>Let us know a little more about you</p> 
     <label for="type">Type:</label>
     <select id="type" name="type">
@@ -90,7 +90,7 @@
         <input type="radio" id="false" name="cats" value = "false"  bind:group={cats}/>
         <label for="false">No</label>
     </fieldset>
-	
+
 	<div>
 		<input type="submit" value="Submit" />
 		<input type="reset" value="Reset" />
