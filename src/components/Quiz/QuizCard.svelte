@@ -1,8 +1,9 @@
 <script lang="ts">
-	let { quiz } = $props()
+	let { quiz, selected = $bindable() } = $props()
 	let hidden = $state(false)
 
-	function handleAnswer() {
+	function handleAnswer(e: { currentTarget: { value: string }}) {
+		selected = e.currentTarget.value
 		hidden = true
 	}
 </script>
@@ -19,8 +20,8 @@
 				<div class="mt-4 text-base font-semibold text-base-content space-y-2">
 					{#each quiz.answers as answer, index}
 						<div class="flex items-center gap-x-2">
-							<input type="radio" onclick={handleAnswer}
-										 id="option-{index}" name="answer" class="radio radio-primary" />
+							<input type="radio" onclick={handleAnswer} value={answer}
+										 id="option-{index}" name="answer-{index}" class="radio radio-primary" />
 							<label for="option-{index}">{answer}</label>
 						</div>
 					{/each}
