@@ -1,19 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types'; //'@sveltejs/kit'; //
-
-export const actions = {
-	default: async ({ request }) => {
-		const data = await request.formData();
-		const type = data.get('type');
-		const zip = data.get('zipcode');
-
-		console.log(`type: ${type}`);
-		if (!zip) {
-			return redirect(303, `/pets/${type}`);
-		}
-		return redirect(303, `/pets/${type}?location=${zip}`);
-	}
-};
+import type { PageServerLoad } from './$types'; 
 
 export const load: PageServerLoad = async ({ fetch, params, parent, url }) => {
 	try {
