@@ -1,5 +1,8 @@
 <script lang="ts">
 	import Quiz from '$components/Quiz/Quiz.svelte';
+
+	let { data } = $props()
+	let { supabase, user } = $derived(data)
 </script>
 
 <div class="relative overflow-hidden bg-base-100">
@@ -24,7 +27,7 @@
 	<section aria-labelledby="questionnaires" class="relative mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 lg:py-8">
 		<div class="mx-auto max-w-2xl lg:max-w-none">
 			<div class="mt-16 space-y-16 flex justify-center">
-				<Quiz />
+				<Quiz {supabase} {user} />
 			</div>
 		</div>
 	</section>

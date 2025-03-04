@@ -1,6 +1,8 @@
 <script lang="ts">
 	import QuizCard from '$components/Quiz/QuizCard.svelte';
 
+	let { supabase, user } = $props()
+
 	let prefs = $state({
 		pet_type: '',
 		env_cats: false,
@@ -66,10 +68,37 @@
 	let current_quiz = $state(0);
 	const quiz_total = quizzes.length;
 	let progress = $derived(Math.round((current_quiz / quiz_total) * 100));
-	const cards = Array.from({ length: quiz_total });
+	const cards = $state(Array.from({ length: quiz_total }));
+	let form: HTMLFormElement
 
-	function handleAnswer(selected, index) {
-		current_quiz = index + 1;
+	async function handleAnswer(selected: string, index: number) {
+		if (current_quiz < quiz_total) current_quiz = index + 1;
+		if (progress >= 100) {
+			// Update user profile if user is logged in
+			if (user) {
+				const { data, error } = await supabase
+					.from('prefs')
+					.update({
+						pet_type: prefs.pet_type,
+						size: prefs.size,
+						age: prefs.age,
+						gender: prefs.gender,
+						coat: prefs.coat,
+						env_children: prefs.env_children,
+						env_dogs: prefs.env_dogs,
+						env_cats: prefs.env_cats
+					})
+					.eq('id', user?.id)
+					// .select()
+
+				if (error) {
+					console.error(error)
+					// return fail(500, { error })
+				}
+			}
+
+			form.submit()
+		}
 	}
 
 </script>
@@ -108,3 +137,14 @@
 		{/each}
 	</div>
 </div>
+
+<form bind:this={form} action="/pets/{prefs.pet_type}" method="post" class="hidden">
+	<input type="hidden" name="pet_type" bind:value={prefs.pet_type} />
+	<input type="hidden" name="env_cats" bind:value={prefs.env_cats} />
+	<input type="hidden" name="env_dogs" bind:value={prefs.env_dogs} />
+	<input type="hidden" name="env_children" bind:value={prefs.env_children} />
+	<input type="hidden" name="age" bind:value={prefs.age} />
+	<input type="hidden" name="gender" bind:value={prefs.gender} />
+	<input type="hidden" name="size" bind:value={prefs.size} />
+	<input type="hidden" name="coat" bind:value={prefs.coat} />
+</form>
