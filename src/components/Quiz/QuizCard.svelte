@@ -1,15 +1,21 @@
 <script lang="ts">
-	let { quiz, selected = $bindable() } = $props()
+	let { quiz, index, handleAnswer, selected = $bindable() } = $props()
 	let hidden = $state(false)
 
-	function handleAnswer(e: { currentTarget: { value: string }}) {
+	function passAnswer(e: { currentTarget: { value: string }}) {
 		selected = e.currentTarget.value
+		handleAnswer(selected, index)
 		hidden = true
 	}
+
+	// function handleAnswer(e: { currentTarget: { value: string }}) {
+	// 	selected = e.currentTarget.value
+	// 	hidden = true
+	// }
 </script>
 
 {#if !hidden}
-<div class="card bg-base-200 shadow-md">
+<div class="card glass shadow-md">
 	<div class="card-body">
 		<div class="sm:flex lg:block">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="h-8 w-8 shrink-0 text-primary">
@@ -20,7 +26,7 @@
 				<div class="mt-4 text-base font-semibold text-base-content space-y-2">
 					{#each quiz.answers as answer, index}
 						<div class="flex items-center gap-x-2">
-							<input type="radio" onclick={handleAnswer} value={answer}
+							<input type="radio" onclick={passAnswer} value={answer}
 										 id="option-{index}" name="answer-{index}" class="radio radio-primary" />
 							<label for="option-{index}">{answer}</label>
 						</div>

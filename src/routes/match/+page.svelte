@@ -13,7 +13,7 @@
 	</div>
 
 	<!-- Callout -->
-	<section aria-labelledby="callout-heading" class="relative mx-auto flex max-w-7xl flex-col items-center px-4 pt-32 text-center sm:px-6 lg:px-8">
+	<section aria-labelledby="callout-heading" class="relative mx-auto flex max-w-7xl flex-col items-center px-4 pt-16 text-center sm:px-6 lg:px-8">
 		<div class="mx-auto max-w-2xl lg:max-w-none">
 			<h2 id="sale-heading" class="text-4xl font-bold tracking-tight text-base-content sm:text-5xl lg:text-6xl">Let's find the purrfect match for you!</h2>
 			<p class="mx-auto mt-4 max-w-xl text-xl text-base-content">Tell us about yourself</p>
@@ -21,7 +21,7 @@
 	</section>
 
 	<!-- Questionnaires -->
-	<section aria-labelledby="questionnaires" class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-16">
+	<section aria-labelledby="questionnaires" class="relative mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 lg:py-8">
 		<div class="mx-auto max-w-2xl lg:max-w-none">
 			<div class="mt-16 space-y-16 flex justify-center">
 				<Quiz />
