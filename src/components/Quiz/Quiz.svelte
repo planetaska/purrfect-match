@@ -175,7 +175,7 @@
 	</div>
 </div>
 
-<form bind:this={form} action="/pets/{prefs.pet_type}" method="post" class="hidden">
+<form bind:this={form} action="/pets/{prefs.pet_type.toLowerCase()}" method="post" class="hidden">
 	<input type="hidden" name="pet_type" bind:value={prefs.pet_type} />
 	<input type="hidden" name="env_cats" bind:value={prefs.env_cats} />
 	<input type="hidden" name="env_dogs" bind:value={prefs.env_dogs} />
