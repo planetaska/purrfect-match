@@ -1,21 +1,20 @@
 <script lang="ts">
-	let { quiz, index, handleAnswer, selected = $bindable() } = $props()
-	let hidden = $state(false)
+	import { scale, fly } from 'svelte/transition';
+	let { quiz, index, handleAnswer, selection = $bindable() } = $props()
+	let hidden = $state(true)
 
-	function passAnswer(e: { currentTarget: { value: string }}) {
-		selected = e.currentTarget.value
-		handleAnswer(selected, index)
-		hidden = true
+	export function toggle() {
+		hidden = !hidden
 	}
 
-	// function handleAnswer(e: { currentTarget: { value: string }}) {
-	// 	selected = e.currentTarget.value
-	// 	hidden = true
-	// }
+	function passAnswer() {
+		handleAnswer(index)
+		// hidden = true
+	}
 </script>
 
 {#if !hidden}
-<div class="card glass shadow-md">
+<div class="absolute left-0 sm:left-auto w-full max-w-md card glass shadow-md" in:scale={{duration: 200}} out:fly={{ x: -200, duration: 600 }}>
 	<div class="card-body">
 		<div class="sm:flex lg:block">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="h-8 w-8 shrink-0 text-primary">
@@ -24,13 +23,26 @@
 			<div class="mt-8 sm:mt-0 sm:ml-6 lg:mt-10 lg:ml-0">
 				<p class="text-lg text-base-content">{quiz.question}</p>
 				<div class="mt-4 text-base font-semibold text-base-content space-y-2">
-					{#each quiz.answers as answer, index}
-						<div class="flex items-center gap-x-2">
-							<input type="radio" onclick={passAnswer} value={answer}
-										 id="option-{index}" name="answer-{index}" class="radio radio-primary" />
-							<label for="option-{index}">{answer}</label>
-						</div>
+					{#each quiz.answers as answer, idx}
+						{#if quiz.multiple}
+							<div class="flex items-center gap-x-2">
+								<input type="checkbox"
+											 bind:group={selection} value={answer}
+											 id="option-{index}-{idx}" name="answer-{index}" class="checkbox checkbox-primary" />
+								<label for="option-{index}-{idx}">{answer}</label>
+							</div>
+						{:else}
+							<div class="flex items-center gap-x-2">
+								<input type="radio"
+											 bind:group={selection} value={answer} onclick={() => setTimeout(passAnswer, 200)}
+											 id="option-{index}-{idx}" name="answer-{index}" class="radio radio-primary" />
+								<label for="option-{index}-{idx}">{answer}</label>
+							</div>
+						{/if}
 					{/each}
+					{#if quiz.multiple}
+						<button onclick={passAnswer} class="btn btn-primary mt-6">{selection.length === 0 ? 'No preference' : 'Next'}</button>
+					{/if}
 				</div>
 			</div>
 		</div>
