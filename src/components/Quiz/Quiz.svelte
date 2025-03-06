@@ -62,7 +62,7 @@
 		{
 			question: 'I prefer a pet that is',
 			display: 'I prefer a pet with size: ',
-			answers: ['Small (0-6 lbs)', 'Medium (7-11 lbs)', 'Large (12+ lbs)', 'Extra Large (18+ lbs)'],
+			answers: ['Small', 'Medium', 'Large', 'Extra Large'],
 			multiple: true,
 			binds: 'size',
 		},
