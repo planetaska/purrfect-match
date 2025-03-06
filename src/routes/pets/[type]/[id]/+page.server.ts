@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ fetch, params, parent }) => {
 		const data = await res.json();
 		console.log(data);
 		return {
-			props: { animal: data.animal }
+			animal: data.animal
 		};
 	} catch (error) {
 		console.error(`Error retreiving pets: ${error}`);
