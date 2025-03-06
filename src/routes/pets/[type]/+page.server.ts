@@ -3,73 +3,70 @@ import type { PageServerLoad } from './$types'; //'@sveltejs/kit'; //
 
 export const actions = {
 	default: async ({ request }) => {
-		const data = await request.formData();
-		const type = data.get('type');
-		const filters = {
-			location: data.get('location'),
-			size: data.getAll('size'),
-			gender: data.getAll('gender'),
-			age: data.getAll('age'),
-			good_with_children: data.get('children'),
-			good_with_dogs: data.get('dogs'),
-			good_with_cats: data.get('cats')
-		};
-		//console.log(filters);
+		//const formData = await request.formData();
 
-		const queryParams = new URLSearchParams();
-
-		Object.entries(filters).forEach(([key, value]) => {
-			let val = '';
-			if (value) {
-				if (value instanceof File) {
-					val = value.name;
-				} else if (value instanceof Array) {
-					val = value.join(', ');
-				} else {
-					val = value;
-				}
-			}
-			queryParams.set(key, val);
-		});
-
-		console.log(queryParams);
-
-		// Construct route with query parameters
-		const redirectUrl = `/pets/${type}?${queryParams.toString()}`;
-		console.log(redirectUrl);
-
-		return redirect(303, redirectUrl);
+		return { success: true };
 	}
 };
 
-export const load: PageServerLoad = async ({ fetch, params, parent, url }) => {
+export const load: PageServerLoad = async ({ fetch, params, parent, url, request }) => {
 	try {
 		const { accessToken } = await parent();
-		const zip = url.searchParams.get('location');
-		const { type } = params;
+		let zip = url.searchParams.get('location');
+		let { type } = params;
 
 		console.log(`zip is: ${zip}, type is ${type}`);
 
-		const size = url.searchParams.get('size');
-		const gender = url.searchParams.get('gender');
-		const age = url.searchParams.get('age');
-		const goodWithChildren = url.searchParams.get('good_with_children');
-		const goodWithDogs = url.searchParams.get('good_with_dogs');
-		const goodWithCats = url.searchParams.get('good_with_cats');
-
 		let path = '';
-		if (!zip) {
-			path = `https://api.petfinder.com/v2/animals?type=${type}&page=1`;
+
+		if (request.method == 'POST') {
+			console.log('Form submitted');
+			const formData = await request.formData();
+			const formZip = formData.get('location');
+			const formType = formData.get('type');
+			const size = formData.get('size');
+			const gender = formData.getAll('gender');
+			const age = formData.getAll('age');
+			const goodWithChildren = formData.get('children');
+			const goodWithDogs = formData.get('dogs');
+			const goodWithCats = formData.get('cats');
+
+			// Add other params if they exist
+			if (formZip) {
+				zip = formZip.toString();
+				console.log(`zip from form is ${zip}`);
+			}
+			if (formType) {
+				type = formType.toString();
+				console.log(`type from form is ${type}`);
+			}
+
+			path = 'https://api.petfinder.com/v2/animals?';
+
+			if (!zip) {
+				path += `type=${type}&page=1`;
+			} else {
+				path += `type=${type}&location=${zip}&page=1`;
+			}
+
+			if (size) path += `&size=${size}`;
+			if (gender) path += `&gender=${gender}`;
+			if (age) path += `&age=${age}`;
+			if (goodWithChildren) path += `&good_with_children=${goodWithChildren}`;
+			if (goodWithDogs) path += `&good_with_dogs=${goodWithDogs}`;
+			if (goodWithCats) path += `&good_with_cats=${goodWithCats}`;
+
+			console.log(path);
 		} else {
-			path = `https://api.petfinder.com/v2/animals?type=${type}&location=${zip}&page=1`;
+			path = 'https://api.petfinder.com/v2/animals?';
+
+			if (!zip) {
+				path += `type=${type}&page=1`;
+			} else {
+				path += `type=${type}&location=${zip}&page=1`;
+			}
 		}
-		// Add other params if they exist
-		if (size) path += `&size=${size}`;
-		if (gender) path += `&gender=${gender}`;
-		if (age) path += `&age=${age}`;
-		if (goodWithChildren) path += `&good_with_children=${goodWithChildren}`;
-		if (goodWithDogs) path += `&good_with_dogs=${goodWithDogs}`;
-		if (goodWithCats) path += `&good_with_cats=${goodWithCats}`;
+		console.log(path);
 
 		const res = await fetch(path, {
 			method: 'GET',
