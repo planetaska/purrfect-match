@@ -4,6 +4,43 @@
 
 	let zip_input: HTMLInputElement
 
+	async function getZipCode() {
+		return new Promise((resolve) => {
+			if ("geolocation" in navigator) {
+				navigator.geolocation.getCurrentPosition(async (position) => {
+					const { latitude, longitude } = position.coords;
+					const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+					const response = await fetch(url);
+					const data = await response.json();
+
+					if (data.address && data.address.postcode) {
+						resolve(data.address.postcode);
+					} else {
+						console.log("GPS found, but no ZIP. Falling back to IP...");
+						resolve(await getZipFromIP());
+					}
+				}, async () => {
+					console.log("Geolocation failed. Falling back to IP lookup...");
+					resolve(await getZipFromIP());
+				});
+			} else {
+				console.log("Geolocation not supported. Falling back to IP lookup...");
+				resolve(getZipFromIP());
+			}
+		});
+	}
+
+	async function getZipFromIP() {
+		const response = await fetch("http://ip-api.com/json/");
+		const data = await response.json();
+		return data.zip || "Unknown ZIP";
+	}
+
+	async function populateZip(input: HTMLInputElement) {
+		input.value = await getZipCode() as string;
+	}
+
 	onMount(() => {
 		zip_input.addEventListener('input', (e) => {
 			zip_input.value = formatGeneral(e.target?.value, {
@@ -11,6 +48,8 @@
 				numericOnly: true
 			})
 		})
+
+		populateZip(zip_input)
 	});
 </script>
 
