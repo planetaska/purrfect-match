@@ -1,18 +1,14 @@
 <script lang="ts">
-	// Just an example, suppose we have page data loaded from +page.server.ts:
-	//
 	import type { PageProps } from './$types';
+
 	let { data }: PageProps = $props();
 </script>
 
-{#if data.props}
-	{#if data.props.zip}
-		<p> Pets located near {data.props.zip}</p>
-	{/if}
+{data.type}
 
-	{#each data.props.animal as pet}
-		<div>
-			Pet type: {pet.type}, Name: {pet.name}, Breed: {pet.breeds['primary']}, Location: {pet.organization_id}
-		</div>
-	{/each}
-{/if}
+{#each data.animals as animal}
+	<h1>{animal.type}</h1>
+	<div>
+		<a href="/pets/{data.type}/{animal.id}">{animal.id} {animal.type}</a>
+	</div>
+{/each}
