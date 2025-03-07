@@ -1,35 +1,19 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+	import { zip } from '$utils/store'
+
 	let { data }: PageProps = $props();
+
+	$effect(() => {
+		$zip = (data.zip) ? data.zip : ''
+	})
 </script>
 
-<div >
-	{#if data.props}
-		{#each data.props.types as pet}
-			{#if data.props.zip}
-				{#if pet.name == 'Cat'} 
-					<div>
-						<a href="pets/cat?location={data.props.zip}"> Cat</a>
-					</div>
-				{/if}
-				
-				{#if pet.name == 'Dog'}
-					<div>
-						<a href="pets/dog?location={data.props.zip}"> Dog</a>
-					</div>
-				{/if}
-			{:else}
-				{#if pet.name == 'Cat'} 
-					<div>
-						<a href="pets/cat"> Cat</a>
-					</div>
-				{/if}
-				{#if pet.name == 'Dog'}
-					<div>
-						<a href="pets/dog"> Dog</a>
-					</div>
-				{/if}
-			{/if}
-		{/each}
-	{/if}
+<div>
+	<h1>Pets</h1>
+	<p>Location: {data.zip || 'Any'}</p>
+	<a href="/pets/cats">Cats</a>
+	<a href="/pets/dogs">Dogs</a>
+	<a href="/pets/rabbits">Rabbits</a>
+	<a href="/pets/birds">Birds</a>
 </div>
