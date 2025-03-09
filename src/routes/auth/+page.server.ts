@@ -47,4 +47,33 @@ export const actions: Actions = {
 			redirect(303, '/', { type: 'success', message: "Welcome back!" }, cookies)
 		}
 	},
+
+	reset: async ({ request, cookies, locals: { supabase } }) => {
+		const formData = await request.formData()
+		const email = formData.get('email') as string
+
+		const {error} = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo: '/reset/update',
+		  })
+
+		if (error) {
+			console.error(error)
+			redirect(303, '/auth/error?message=' + error.code)
+		} else {
+			redirect(303, '/update', { type: 'success', message: "Update password" }, cookies)
+		}
+	},
+	
+	update: async ({ request, cookies, locals: { supabase } }) => {
+		const formData = await request.formData()
+		const password = formData.get('password') as string
+
+		const {error} = await supabase.auth.updateUser({ password: new_password })
+		if (error) {
+			console.error(error)
+			redirect(303, '/auth/error?message=' + error.code)
+		} else {
+			redirect(303, '/sign-in', { type: 'success', message: "Sign in" }, cookies)
+		}
+	}
 }
