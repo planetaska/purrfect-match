@@ -1,9 +1,14 @@
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ parent, params, url }) => {
+export const load: PageServerLoad = async ({ parent, params, url, cookies }) => {
 	const { accessToken } = await parent();
-	const zip = url.searchParams.get('zip');
+	let zip: string | undefined = url.searchParams.get('zip') || undefined;
 	const { type } = params;
+
+	// or get zip from cookies
+	if (!zip) {
+		zip = cookies.get('zip');
+	}
 
 	// Get animals
 	let query = 'https://api.petfinder.com/v2/animals?';
@@ -22,6 +27,7 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 
 	return {
 		type: type,
+		zip: zip,
 		animals: result.animals
 	}
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { formatGeneral } from 'cleave-zen'
 	import { onMount } from 'svelte';
+	import { zip } from '$utils/store';
 
 	let zip_input: HTMLInputElement
 
@@ -16,6 +17,7 @@
 
 					if (data.address && data.address.postcode) {
 						resolve(data.address.postcode);
+						$zip = data.address.postcode; // Save to the store
 					} else {
 						console.log("GPS found, but no ZIP. Falling back to IP...");
 						resolve(await getZipFromIP());
@@ -34,7 +36,8 @@
 	async function getZipFromIP() {
 		const response = await fetch("http://ip-api.com/json/");
 		const data = await response.json();
-		return data.zip || "Unknown ZIP";
+		$zip = data.zip; // Save to the store
+		return data.zip || "";
 	}
 
 	async function populateZip(input: HTMLInputElement) {
@@ -43,13 +46,15 @@
 
 	onMount(() => {
 		zip_input.addEventListener('input', (e) => {
-			zip_input.value = formatGeneral(e.target?.value, {
+			zip_input.value = formatGeneral((e.target as HTMLInputElement)?.value, {
 				blocks: [5],
 				numericOnly: true
 			})
 		})
 
-		populateZip(zip_input)
+		// avoid asking everytime
+		if ($zip === '') populateZip(zip_input)
+		else zip_input.value = $zip
 	});
 </script>
 
