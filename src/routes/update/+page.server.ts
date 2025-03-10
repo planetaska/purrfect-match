@@ -8,7 +8,7 @@ export const actions : Actions ={
         const password = formData.get('new_password') as string
 
         const { data, error: err } = await locals.supabase.auth.updateUser({
-            password
+            password: password
         })
 
         if (err) {
@@ -22,13 +22,13 @@ export const actions : Actions ={
             })
         }
 
-        redirect(303, "/user/my");
+        redirect(303, "/sign-in");
     },
 }
 
-export const load = async ({ locals }) => {
-    // if there is no user's session redirect back to the home page
-    if (!locals.session) {
-        redirect(303, '/');
-    }
-  }
+// export const load = async ({ locals }) => {
+//     // if there is no user's session redirect back to the home page
+//     if (!locals.session) {
+//         redirect(303, '/');
+//     }
+//   }
