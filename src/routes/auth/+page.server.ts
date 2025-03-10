@@ -68,7 +68,7 @@ export const actions: Actions = {
 		const formData = await request.formData()
 		const password = formData.get('password') as string
 
-		const {error} = await supabase.auth.updateUser({ password: new_password })
+		const {error} = await supabase.auth.updateUser({ password: password })
 		if (error) {
 			console.error(error)
 			redirect(303, '/auth/error?message=' + error.code)
