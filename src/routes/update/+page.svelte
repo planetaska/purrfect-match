@@ -1,0 +1,17 @@
+<script lang="ts">
+    // import { enhance } from '$app/forms';
+	import type { PageProps } from './$types';
+
+let { data, form }: PageProps = $props();
+
+</script>
+
+<h2>Change your password</h2>
+<!-- {#if form?.invalid}<mark>{form?.message}!</mark>{/if} -->
+<form action="?/update_password" method="POST" >
+    <label for="new_password"> New password </label>
+    <input name="new_password" required/>   
+    <label for="password_confirm">Confirm new password</label>
+    <input name="password_confirm" required/>       
+    <button>Update password</button>
+</form>
