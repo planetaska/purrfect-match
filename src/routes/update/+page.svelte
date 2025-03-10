@@ -2,7 +2,7 @@
     // import { enhance } from '$app/forms';
 	import type { PageProps } from './$types';
 
-let { data, form }: PageProps = $props();
+	let { data, form }: PageProps = $props();
 
 </script>
 
