@@ -7,7 +7,7 @@
 
 {#if data && data.length > 0}
   <ul>
-    {#each data.favorite as pet}
+    {#each data.favorites as pet}
       <li>
         <div>
           <img src={pet.petPhoto} alt={pet.petName} style="width: 100px; height: 100px;" />
