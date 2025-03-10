@@ -1,4 +1,64 @@
-<main>
+<script lang="ts">
+	import { formatGeneral } from 'cleave-zen'
+	import { onMount } from 'svelte';
+	import { zip } from '$utils/store';
+
+	let zip_input: HTMLInputElement
+
+	async function getZipCode() {
+		return new Promise((resolve) => {
+			if ("geolocation" in navigator) {
+				navigator.geolocation.getCurrentPosition(async (position) => {
+					const { latitude, longitude } = position.coords;
+					const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+					const response = await fetch(url);
+					const data = await response.json();
+
+					if (data.address && data.address.postcode) {
+						resolve(data.address.postcode);
+						$zip = data.address.postcode; // Save to the store
+					} else {
+						console.log("GPS found, but no ZIP. Falling back to IP...");
+						resolve(await getZipFromIP());
+					}
+				}, async () => {
+					console.log("Geolocation failed. Falling back to IP lookup...");
+					resolve(await getZipFromIP());
+				});
+			} else {
+				console.log("Geolocation not supported. Falling back to IP lookup...");
+				resolve(getZipFromIP());
+			}
+		});
+	}
+
+	async function getZipFromIP() {
+		const response = await fetch("http://ip-api.com/json/");
+		const data = await response.json();
+		$zip = data.zip; // Save to the store
+		return data.zip || "";
+	}
+
+	async function populateZip(input: HTMLInputElement) {
+		input.value = await getZipCode() as string;
+	}
+
+	onMount(() => {
+		zip_input.addEventListener('input', (e) => {
+			zip_input.value = formatGeneral((e.target as HTMLInputElement)?.value, {
+				blocks: [5],
+				numericOnly: true
+			})
+		})
+
+		// avoid asking everytime
+		if ($zip === '') populateZip(zip_input)
+		else zip_input.value = $zip
+	});
+</script>
+
+<main class="relative flex-grow overflow-hidden">
 	<div class="relative isolate">
 		<svg class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-base-content/10 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]" aria-hidden="true">
 			<defs>
@@ -15,22 +75,25 @@
 			<div class="aspect-801/1036 w-[50.0625rem] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"></div>
 		</div>
 		<div class="overflow-hidden">
-			<div class="mx-auto max-w-7xl px-6 pt-36 pb-32 sm:pt-60 lg:px-8 lg:pt-32">
+			<div class="mx-auto max-w-7xl px-6 pt-6 pb-12 lg:px-8 sm:pt-4">
 				<div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
 					<div class="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
 						<h1 class="text-5xl font-semibold tracking-tight text-pretty text-base-content sm:text-7xl">Because every happy tail begins with the right match.</h1>
 						<p class="mt-8 text-lg font-light text-pretty text-base-content sm:max-w-md sm:text-xl/8 lg:max-w-none">
 							<span class="font-medium italic">Find your perfect companion, not just any pet.</span>
-							Every pet deserves their perfect human, and every human deserves their perfect pet. At Purrfect Match, we've reimagined pet adoption by focusing on what truly matters – compatibility.
+							<span class="hidden sm:inline">Every pet deserves their perfect human, and every human deserves their perfect pet. At Purrfect Match, we've reimagined pet adoption by focusing on what truly matters – compatibility.</span>
 						</p>
-						<div class="mt-10 flex items-center gap-x-2">
-							<label class="input">
-								<svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
-								<form method="GET" action="/pets">
-									<label for="zipcode"></label>
-									<input type="search" name="location" class="grow" placeholder="Zip code" required/>
-								</form>						
-							<a href="/match" class="btn btn-primary">Get started</a>
+						<div class="mt-10 grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-x-4 sm:justify-between">
+							<form action="/pets" class="order-2 sm:order-none sm:col-span-2 flex items-center space-x-4">
+								<label class="input">
+									<svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
+									<input type="search" name="zip" bind:this={zip_input} pattern={`[0-9]{5}`} class="grow" placeholder="Zip code" />
+								</label>
+								<button type="submit" class="btn btn-secondary py-2">Find near me</button>
+							</form>
+							<div class="order-1 sm:order-none">
+								<a href="/match" class="btn btn-primary">Match for Me</a>
+							</div>
 						</div>
 					</div>
 					<div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
