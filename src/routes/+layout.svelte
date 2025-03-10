@@ -62,6 +62,8 @@
 	{@render children()}
 
 	{#if showLoading}
-		<p>Loading... <span class="loading loading-spinner text-secondary"></span></p>
+		<div class="absolute top-0 left-0 right-0 bottom-0 z-10 flex items-center justify-center bg-base-100">
+			Loading... <span class="loading loading-spinner text-secondary"></span>
+		</div>
 	{/if}
 </div>
