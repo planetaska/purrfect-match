@@ -3,7 +3,7 @@
 	Form actions: register, sign_in
  */
 
-// import { redirect } from '@sveltejs/kit'
+import { fail } from '@sveltejs/kit'
 import { redirect } from 'sveltekit-flash-message/server'
 
 import type { Actions } from './$types'
@@ -67,16 +67,17 @@ export const actions: Actions = {
 	
 	update_password: async ({ request, cookies, locals: { supabase } }) => {
 		const formData = await request.formData()
-		const password = formData.get('password') as string
+		const newPassword = formData.get('new-password') as string
+		const confirmPassword = formData.get('confirm-password') as string
 
-		console.log(password)
-
-		const {error} = await supabase.auth.updateUser({ password: password })
-		if (error) {
-			console.error(error)
-			redirect(303, '/auth/error?message=' + error.code)
-		} else {
-			redirect(303, '/sign-in', { type: 'success', message: "Sign in" }, cookies)
+		if (newPassword !== '' && confirmPassword === newPassword) {
+			const {error} = await supabase.auth.updateUser({ password: newPassword })
+			if (error) {
+				console.error(error)
+				return fail(500, { error})
+			} else {
+				redirect(303, '/sign-in', { type: 'success', message: "Sign in" }, cookies)
+			}
 		}
 	}
 }
