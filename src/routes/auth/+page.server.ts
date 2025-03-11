@@ -48,37 +48,35 @@ export const actions: Actions = {
 		}
 	},
 
-	// reset_password: async ({ request, locals: { supabase } }) => {
-	// 	const formData = await request.formData()
-	// 	const email = formData.get('email') as string
+	reset_password: async ({ request, locals: { supabase } }) => {
+		const formData = await request.formData()
+		const email = formData.get('email') as string
 
-	// 	console.log(email)
+		const {data, error} = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo: '/update',
+		  })
 
-	// 	const {error} = await supabase.auth.resetPasswordForEmail(email, {
-	// 		redirectTo: '/update',
-	// 	  })
-
-	// 	if (error) {
-	// 		console.error(error)
-	// 		redirect(303, '/auth/error?message=' + error.code)
-	// 	} 
-	// 	else {
-	// 		redirect(303, '/', { type: 'success', message: "Update password" }, cookies)
-	// 	}
-	// },
+		if (error) {
+			console.error(error)
+			redirect(303, '/auth/error?message=' + error.code)
+		} 
+		else {
+			redirect(303, '/');
+		}
+	},
 	
-	// update_password: async ({ request, cookies, locals: { supabase } }) => {
-	// 	const formData = await request.formData()
-	// 	const password = formData.get('password') as string
+	update_password: async ({ request, cookies, locals: { supabase } }) => {
+		const formData = await request.formData()
+		const password = formData.get('password') as string
 
-	// 	console.log(password)
+		console.log(password)
 
-	// 	const {error} = await supabase.auth.updateUser({ password: password })
-	// 	if (error) {
-	// 		console.error(error)
-	// 		redirect(303, '/auth/error?message=' + error.code)
-	// 	} else {
-	// 		redirect(303, '/sign-in', { type: 'success', message: "Sign in" }, cookies)
-	// 	}
-	// }
+		const {error} = await supabase.auth.updateUser({ password: password })
+		if (error) {
+			console.error(error)
+			redirect(303, '/auth/error?message=' + error.code)
+		} else {
+			redirect(303, '/sign-in', { type: 'success', message: "Sign in" }, cookies)
+		}
+	}
 }
