@@ -9,8 +9,6 @@ export const load: PageServerLoad = async ({ depends, locals: { supabase, user }
                 console.log(`User ID is ${user?.id}`)
                 return response
             })
-
-
         if (error){
             console.log(error)
         }
