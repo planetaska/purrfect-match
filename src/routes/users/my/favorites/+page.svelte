@@ -1,6 +1,24 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-	let { data }: PageProps = $props()
+	let { data}: PageProps = $props()
+
+	async function deleteFav(id: number) {
+		const formData = new FormData();
+		formData.append('petId', id.toString());
+
+		const response = await fetch('/users/my/favorites', {
+			method: 'POST',
+			body: formData,
+		});
+
+		if (response.ok) {
+			// Successfully deleted pet, maybe navigate or refresh
+			alert('Pet deleted successfully!');
+		} else {
+			alert('Error deleting pet');
+		}
+  }
+  
 </script>
 
 <div>
@@ -19,7 +37,7 @@
 					<h2 class="card-title">{pet.petName}</h2>
 					<p>{pet.petDescription}</p>
 					<div class="card-actions justify-end">
-						<button class="btn btn-active btn-secondary">Delete</button>
+						<button class="btn btn-active btn-secondary" onclick={()=>deleteFav(pet.petID)}>Delete</button>
 						<button class="btn btn-primary"> <a href="/pets/type/{pet.petID}"> View Details</a></button>
 					</div>
 					</div>
