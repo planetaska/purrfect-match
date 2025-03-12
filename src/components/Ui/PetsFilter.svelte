@@ -1,0 +1,132 @@
+<script lang="ts">
+	import type { PageProps } from './$types';
+
+	let {
+		sizes, ages, genders, coats, envs, toggleMobFilter
+	}: PageProps = $props();
+</script>
+
+<section aria-labelledby="filter-heading" class="border-t border-gray-200 pt-6">
+	<h2 id="filter-heading" class="sr-only">Search filters</h2>
+
+	<div class="flex items-center justify-between">
+		<div class="relative inline-block text-left">
+			<div class="dropdown">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+					Sort
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+					</svg>
+				</div>
+				<ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+					<li><a>Most Recent</a></li>
+					<li><a>Oldest Top</a></li>
+					<li><a>Nearest Top</a></li>
+					<li><a>Farthest Top</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Mobile filter dialog toggle, controls the 'mobileFilterDialogOpen' state. -->
+		<button type="button" onclick={toggleMobFilter}
+						class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden">Filters</button>
+
+		<div class="hidden sm:flex sm:items-baseline sm:space-x-8">
+			<div class="dropdown dropdown-center">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+					Size
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+					</svg>
+				</div>
+				<ul tabindex="-1" class="dropdown-content mt-2 menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+					{#each sizes as size}
+						<li>
+							<label>
+								<input type="checkbox" name="size[]" value="{size}" class="checkbox" />
+								{size}
+							</label>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<div class="dropdown dropdown-center">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+					Age
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+					</svg>
+				</div>
+				<ul tabindex="-1" class="dropdown-content mt-2 menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+					{#each ages as age}
+						<li>
+							<label>
+								<input type="checkbox" name="age[]" value="{age}" class="checkbox" />
+								{age}
+							</label>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<div class="dropdown dropdown-center">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+					Gender
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+					</svg>
+				</div>
+				<ul tabindex="-1" class="dropdown-content mt-2 menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+					{#each genders as gender}
+						<li>
+							<label>
+								<input type="radio" name="gender" value="{gender}" class="radio" />
+								{gender}
+							</label>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<div class="dropdown dropdown-center">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+					Coat
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+					</svg>
+				</div>
+				<ul tabindex="-1" class="dropdown-content mt-2 menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+					{#each coats as coat}
+						<li>
+							<label>
+								<input type="radio" name="coat" value="{coat}" class="radio" />
+								{coat}
+							</label>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<div class="dropdown dropdown-end">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+					Environment
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+					</svg>
+				</div>
+				<ul tabindex="-1" class="dropdown-content mt-2 menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+					{#each envs as env}
+						<li>
+							<label>
+								<input type="checkbox" name="env[]" value="{env}" class="checkbox" />
+								{env}
+							</label>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+		</div>
+	</div>
+</section>
