@@ -8,11 +8,11 @@
 
 	let { data }: PageProps = $props();
 
-	const sizes = ["Small", "Medium", "Large", "Extra Large"];
+	const sizes = ["Small", "Medium", "Large", "XLarge"];
 	const ages = ["Baby", "Young", "Adult", "Senior"];
 	const genders = ["Male", "Female"];
 	const coats = ["Hairless", "Short", "Medium", "Long", "Wire", "Curly"];
-	const envs = ["With children", "With cats", "With dogs"];
+	const envs = ["Good with children", "Good with cats", "Good with dogs"];
 
 	let show_mob_filter = $state(false)
 
