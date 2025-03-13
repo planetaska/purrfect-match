@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ fetch, params, parent }) => {
 	const { accessToken } = await parent();
-	const { id } = params;
+	const { type, id } = params;
 
 	const res = await fetch(`https://api.petfinder.com/v2/animals/${id}`, {
 		method: 'GET',
@@ -14,5 +14,5 @@ export const load: PageServerLoad = async ({ fetch, params, parent }) => {
 
 	const { animal } = await res.json();
 
-	return { animal }
+	return { animal, type }
 };

@@ -12,9 +12,9 @@
 	<div class="flex items-center justify-between">
 		<div class="relative inline-block text-left">
 			<div class="dropdown">
-				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-base-content hover:text-gray-400">
 					Sort
-					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-500 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
 						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 					</svg>
 				</div>
@@ -29,13 +29,13 @@
 
 		<!-- Mobile filter dialog toggle, controls the 'mobileFilterDialogOpen' state. -->
 		<button type="button" onclick={toggleMobFilter}
-						class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden">Filters</button>
+						class="inline-block text-sm font-medium text-base-content hover:text-gray-400 sm:hidden">Filters</button>
 
 		<div class="hidden sm:flex sm:items-baseline sm:space-x-8">
 			<div class="dropdown dropdown-center">
-				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-base-content hover:text-gray-400">
 					Size
-					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-500 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
 						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 					</svg>
 				</div>
@@ -52,9 +52,9 @@
 			</div>
 
 			<div class="dropdown dropdown-center">
-				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-base-content hover:text-gray-400">
 					Age
-					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-500 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
 						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 					</svg>
 				</div>
@@ -71,9 +71,9 @@
 			</div>
 
 			<div class="dropdown dropdown-center">
-				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-base-content hover:text-gray-400">
 					Gender
-					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-500 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
 						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 					</svg>
 				</div>
@@ -90,9 +90,9 @@
 			</div>
 
 			<div class="dropdown dropdown-center">
-				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-base-content hover:text-gray-400">
 					Coat
-					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-500 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
 						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 					</svg>
 				</div>
@@ -109,9 +109,9 @@
 			</div>
 
 			<div class="dropdown dropdown-end">
-				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-base-content hover:text-gray-400">
 					Environment
-					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+					<svg class="-mr-1 ml-1 size-5 shrink-0 text-gray-500 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
 						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 					</svg>
 				</div>

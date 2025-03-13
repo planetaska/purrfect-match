@@ -10,7 +10,7 @@
 
 <a href={link} class="group">
 	<img src={photo} alt="" class="aspect-square w-full rounded-lg object-cover group-hover:opacity-75 sm:aspect-2/3">
-	<div class="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
+	<div class="mt-4 flex items-start justify-between text-base font-medium text-base-content">
 		<h3>{animal.name}</h3>
 		<p>{animal.breeds.primary}</p>
 	</div>
