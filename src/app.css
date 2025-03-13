@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.av iframe {
+    @apply w-full h-full;
+}
