@@ -28,7 +28,7 @@ export const load: PageServerLoad = async ({ depends, locals: { supabase, user }
 		// .then(data => console.log(data))
 	const prefs_form = await superValidate(prefs, zod(prefsSchema))
 
-	return { account_form, prefs_form }
+	return { account_form, prefs_form}
 }
 
 // Form actions
