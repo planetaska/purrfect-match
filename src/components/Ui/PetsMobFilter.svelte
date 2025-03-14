@@ -1,9 +1,17 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+	import { snakeCase } from 'es-toolkit';
 
 	let {
 		sizes, ages, genders, coats, envs, toggleMobFilter
 	}: PageProps = $props();
+
+	let form: HTMLFormElement
+
+	function submitForm() {
+		form.requestSubmit()
+		toggleMobFilter()
+	}
 </script>
 
 <!--
@@ -23,7 +31,7 @@
 		<div class="relative ml-auto flex size-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl">
 			<div class="flex items-center justify-between px-4">
 				<h2 class="text-lg font-medium text-gray-900">Filters</h2>
-				<button type="button" onclick={toggleMobFilter}
+				<button type="button" onclick={submitForm}
 								class="-mr-2 flex size-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden">
 					<span class="sr-only">Close menu</span>
 					<svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
@@ -33,7 +41,7 @@
 			</div>
 
 			<!-- Filters -->
-			<form class="mt-4">
+			<form bind:this={form} method="get" class="mt-4">
 				<div class="border-t border-gray-200 px-4 py-6">
 					<h3 class="-mx-2 -my-3 flow-root">
 						<button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400" aria-controls="filter-section-0" aria-expanded="false">
@@ -45,7 +53,7 @@
 							{#each sizes as size}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="size[]" value="{size}" class="checkbox" />
+										<input type="checkbox" name="size" value="{size.toLowerCase()}" class="checkbox" />
 										{size}
 									</label>
 								</div>
@@ -64,7 +72,7 @@
 							{#each ages as age}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="age[]" value="{age}" class="checkbox" />
+										<input type="checkbox" name="age" value="{age.toLowerCase()}" class="checkbox" />
 										{age}
 									</label>
 								</div>
@@ -83,7 +91,7 @@
 							{#each genders as gender}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="age[]" value="{gender}" class="checkbox" />
+										<input type="checkbox" name="gender" value="{gender.toLowerCase()}" class="checkbox" />
 										{gender}
 									</label>
 								</div>
@@ -102,7 +110,7 @@
 							{#each coats as coat}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="age[]" value="{coat}" class="checkbox" />
+										<input type="checkbox" name="coat" value="{coat.toLowerCase()}" class="checkbox" />
 										{coat}
 									</label>
 								</div>
@@ -121,7 +129,7 @@
 							{#each envs as env}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="env[]" value="{env}" class="checkbox" />
+										<input type="checkbox" name={snakeCase(env)} value="true" class="checkbox" />
 										{env}
 									</label>
 								</div>
