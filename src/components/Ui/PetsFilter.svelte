@@ -9,12 +9,11 @@
 
 	let form: HTMLFormElement
 
-	function submitForm() {
-		form.requestSubmit()
-	}
+	// function submitForm() {
+	// 	form.requestSubmit()
+	// }
 
 	function menuClose() {
-		console.log('close')
 		form.requestSubmit()
 	}
 
@@ -37,7 +36,7 @@
 						<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 					</svg>
 				</div>
-				<ul tabindex="-1" onblur={submitForm} class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+				<ul tabindex="-1" onblur={menuClose} class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
 					<li>
 						<label>
 							<input type="radio" name="sort" value="recent" class="radio" checked />
