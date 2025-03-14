@@ -5,16 +5,17 @@
 
 <div>
 	{#if data.favorites && data.favorites.length > 0}
-	<h2 class="text-base/7 font-semibold text-base-content">Your Favorites</h2> 
+	<h2 class="mt-2 text-3xl font-bold tracking-tight text-base-content">Your Favorites</h2> 
+	<div class="space-y-4">
 		{#each data.favorites as pet}
 			<form method="POST">
-				<div class="card card-side bg-base-100 shadow-sm">
-				
+				<div class="card card-side bg-base-100 shadow-sm ">
 					<img
+						class="rounded-full"
 						src={pet.petPhoto} 
 						alt="pet" 
 						width="200"
-						height="200"/>
+						height="200" />
 				
 					<div class="card-body">
 					<h2 class="card-title">{pet.petName}</h2>
@@ -29,7 +30,9 @@
 				</div>
 			</form>
 		{/each}
+	</div>
 	{:else}
-	<h2 class="text-base/7 font-semibold text-base-content">You have no favorites yet</h2>
+	<h2 class="mt-2 text-3xl font-bold tracking-tight text-base-content">You have no favorites yet</h2>
 	{/if}
+	
 </div>
