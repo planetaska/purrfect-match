@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatGeneral } from 'cleave-zen'
+	// import { formatGeneral } from 'cleave-zen'
 	import { onMount } from 'svelte';
 	import { zip } from '$utils/store';
 
@@ -45,12 +45,12 @@
 	}
 
 	onMount(() => {
-		zip_input.addEventListener('input', (e) => {
-			zip_input.value = formatGeneral((e.target as HTMLInputElement)?.value, {
-				blocks: [5],
-				numericOnly: true
-			})
-		})
+		// zip_input.addEventListener('input', (e) => {
+		// 	zip_input.value = formatGeneral((e.target as HTMLInputElement)?.value, {
+		// 		blocks: [5],
+		// 		numericOnly: true
+		// 	})
+		// })
 
 		// avoid asking everytime
 		if ($zip === '') populateZip(zip_input)

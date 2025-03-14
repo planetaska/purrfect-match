@@ -46,7 +46,7 @@
 	"dependencies": {
 		"@supabase/ssr": "^0.5.2",
 		"@supabase/supabase-js": "^2.48.1",
-		"cleave-zen": "^0.0.17",
-		"es-toolkit": "^1.33.0"
+		"es-toolkit": "^1.33.0",
+		"masky-js": "^1.0.1"
 	}
 }
