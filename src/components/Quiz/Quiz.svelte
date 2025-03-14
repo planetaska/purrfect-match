@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import QuizCard from '$components/Quiz/QuizCard.svelte';
 
 	let { supabase, user } = $props()
@@ -62,14 +63,14 @@
 		{
 			question: 'I prefer a pet that is',
 			display: 'I prefer a pet with size: ',
-			answers: ['Small', 'Medium', 'Large', 'Extra Large'],
+			answers: ['Small', 'Medium', 'Large', 'XLarge'],
 			multiple: true,
 			binds: 'size',
 		},
 		{
 			question: 'I would like a pet that has',
 			display: 'I prefer a pet with hair: ',
-			answers: ['Short hair', 'Medium hair', 'Long hair', 'Wire hair', 'Curly hair', 'No preference'],
+			answers: ['Short hair', 'Medium hair', 'Long hair', 'Wire hair', 'Curly hair'],
 			multiple: false,
 			binds: 'coat',
 		},
@@ -98,13 +99,25 @@
 			// Show the final card
 			final_card.classList.remove('hidden')
 
+			// construct the search params
+			const searchParams = new URLSearchParams()
+			searchParams.set('size', prefs.size.join(',').toLowerCase())
+			searchParams.set('age', prefs.age.join(',').toLowerCase())
+			searchParams.set('gender', prefs.gender.toLowerCase())
+			searchParams.set('coat', prefs.coat.split(' ')[0].toLowerCase())
+			searchParams.set('good_with_children', prefs.env_children === 'Yes' ? 'true' : 'false')
+			searchParams.set('good_with_dogs', prefs.env_dogs === 'Yes' ? 'true' : 'false')
+			searchParams.set('good_with_cats', prefs.env_cats === 'Yes' ? 'true' : 'false')
+
+			const path = `/pets/${prefs.pet_type.toLowerCase()+'s'}?${searchParams.toString()}`
+
 			// Update user profile if user is logged in
 			if (user) {
 				const { data, error } = await supabase
 					.from('prefs')
 					.update({
 						pet_type: prefs.pet_type,
-						size: prefs.size.map(value => value.split(' (')[0]),
+						size: prefs.size,
 						age: prefs.age,
 						gender: prefs.gender,
 						coat: prefs.coat,
@@ -113,6 +126,9 @@
 						env_cats: prefs.env_cats === 'Yes'
 					})
 					.eq('id', user?.id)
+					.then(response => {
+						goto(path)
+					})
 					// .select()
 
 				if (error) {
@@ -121,7 +137,8 @@
 				}
 			}
 
-			form.submit()
+			// form.submit()
+			goto(path)
 		}
 	}
 

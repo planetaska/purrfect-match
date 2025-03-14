@@ -3,8 +3,14 @@
 	import { page } from '$app/state'
 
 	let { pagi }: PageProps = $props()
-	const prev_link = $derived(pagi.current_page > 1 ? `${page.url.pathname}?page=${pagi.current_page - 1}` : '')
-	const next_link = $derived(pagi.current_page < pagi.total_pages ? `${page.url.pathname}?page=${pagi.current_page + 1}` : '')
+	const params = $derived.by(() => {
+		let pams = page.url.searchParams
+		pams.delete('page')
+		return pams.toString()
+	})
+
+	const prev_link = $derived(pagi.current_page > 1 ? `${page.url.pathname}?${params}&page=${pagi.current_page - 1}` : '')
+	const next_link = $derived(pagi.current_page < pagi.total_pages ? `${page.url.pathname}?${params}&page=${pagi.current_page + 1}` : '')
 
 	interface PaginationInfo {
 		count_per_page: number;
@@ -70,8 +76,8 @@
 		return getPaginationIndexes(pagi)
 	})
 
-	const pagi_link_class = "inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-	const pagi_active_class = ""
+	// const pagi_link_class = "inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+	// const pagi_active_class = ""
 </script>
 
 <nav class="flex items-center justify-between border-t border-base-300 px-4 sm:px-0">
@@ -88,10 +94,10 @@
 			{#if link === '...'}
 				<span class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500">...</span>
 			{:else if link === pagi.current_page}
-				<a href={`${page.url.pathname}?page=${link}`}
+				<a href={`${page.url.pathname}?${params}&page=${link}`}
 					 class="inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600">{link}</a>
 			{:else}
-				<a href={`${page.url.pathname}?page=${link}`}
+				<a href={`${page.url.pathname}?${params}&page=${link}`}
 					 class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">{link}</a>
 			{/if}
 		{/each}
