@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+	import AddFavorite from '$components/Ui/AddFavorite.svelte';
 	import { unescape } from 'es-toolkit/string'
 
 	let { data }: PageProps = $props()
@@ -74,20 +75,6 @@
 		return options[randomIndex];
 	}
 
-	async function addToFav(animal, user){
-		console.log(`user is ${user?.id}`)
-		const { data, error } = await supabase
-        .from('favorites')
-        .insert({ id: user?.id, petID: animal.id, petName: animal.name, petType: animal.type, petDescription: animal.description })
-
-        if (error) {
-            console.error('Error deleting item:', error);
-            alert('Error adding pet');
-        } else{
-            alert('Pet added successfully!');
-            console.log('Pet added successfully!');
-        }
-	}
 </script>
 
 <div class="bg-base-100">
@@ -117,9 +104,8 @@
 						</ul>
 						{animal.type}
 					</div>
-					<button class="btn btn-primary" onclick={() => addToFav(animal, user)}>Add to Favorites</button>
+					<AddFavorite {supabase} {animal} {user}/>
 				</div>
-
 				<div class="mt-6 space-y-6 border-b border-gray-200 pb-4">
 					<div class="sm:hidden flex justify-between items-end">
 						<h3 class="text-base-content text-xl">
