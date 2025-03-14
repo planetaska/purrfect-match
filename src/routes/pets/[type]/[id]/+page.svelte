@@ -3,6 +3,8 @@
 	import { unescape } from 'es-toolkit/string'
 
 	let { data }: PageProps = $props()
+	let { supabase, user } = $derived(data)
+
 	const animal = $derived(data.animal)
 	const cover_photo = $derived.by(() => {
 		return animal.photos.length > 0 ? animal.photos[0].large : `/images/layout/placeholder/${data.type}.png`
@@ -71,6 +73,21 @@
 		const randomIndex = Math.floor(Math.random() * options.length);
 		return options[randomIndex];
 	}
+
+	async function addToFav(animal, user){
+		console.log(`user is ${user?.id}`)
+		const { data, error } = await supabase
+        .from('favorites')
+        .insert({ id: user?.id, petID: animal.id, petName: animal.name, petType: animal.type, petDescription: animal.description })
+
+        if (error) {
+            console.error('Error deleting item:', error);
+            alert('Error adding pet');
+        } else{
+            alert('Pet added successfully!');
+            console.log('Pet added successfully!');
+        }
+	}
 </script>
 
 <div class="bg-base-100">
@@ -100,6 +117,7 @@
 						</ul>
 						{animal.type}
 					</div>
+					<button class="btn btn-primary" onclick={() => addToFav(animal, user)}>Add to Favorites</button>
 				</div>
 
 				<div class="mt-6 space-y-6 border-b border-gray-200 pb-4">
