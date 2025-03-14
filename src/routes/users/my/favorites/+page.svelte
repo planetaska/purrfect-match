@@ -9,15 +9,18 @@
 		{#each data.favorites as pet}
 			<form method="POST">
 				<div class="card card-side bg-base-100 shadow-sm">
-					<figure>
+				
 					<img
 						src={pet.petPhoto} 
-						alt="pet" />
-					</figure>
+						alt="pet" 
+						width="200"
+						height="200"/>
+				
 					<div class="card-body">
 					<h2 class="card-title">{pet.petName}</h2>
-					<h3 class="petID">{pet.petID} </h3>
-					<p>{pet.petDescription}</p>
+					<h3 class="petID">PetFinder ID: {pet.petID} </h3>
+					<p>Description: {pet.petDescription}</p>
+					<a href={pet.petURL} target="_blank" class="link link-primary">Read more on PetFinder.com</a> 
 					<div class="card-actions justify-end">
 						<button class="btn btn-active btn-secondary" type="submit" name="petId" value={pet.petID}>Delete</button>
 						<button class="btn btn-primary"> <a href="/pets/type/{pet.petID}"> View Details</a></button>
