@@ -3,6 +3,7 @@
 	import DarkToggle from '$components/Ui/DarkToggle.svelte'
 	import { navigating } from '$app/state'
 	// import { onMount } from 'svelte';
+	import { zip } from '$utils/store';
 
 	let { supabase, user, profile } = $props();
 	let showMobileMenu = $state(false)
@@ -62,7 +63,7 @@
 		</div>
 		<div class="hidden lg:flex lg:gap-x-12">
 			<a href="/match" class="text-sm/6 font-semibold text-base-content">Match for Me</a>
-			<a href="/pets" class="text-sm/6 font-semibold text-base-content">Find Pet</a>
+			<a href="/pets{$zip !== '' ? '?zip='+$zip : ''}" class="text-sm/6 font-semibold text-base-content">Find Pet</a>
 			{#if user}
 			<a href="/users/my/favorites" class="text-sm/6 font-semibold text-base-content">My Favorites</a>
 			{/if}
@@ -123,7 +124,7 @@
 				<div class="-my-6 divide-y divide-gray-500/10">
 					<div class="space-y-2 py-6">
 						<a href="/match" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">Match for Me</a>
-						<a href="/pets" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">Find Pet</a>
+						<a href="/pets{$zip !== '' ? '?zip='+$zip : ''}" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">Find Pet</a>
 						{#if user}
 						<a href="/users/my/favorites" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-base-content hover:bg-base-300">My Favorites</a>
 						{/if}

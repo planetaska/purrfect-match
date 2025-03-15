@@ -7,7 +7,7 @@
 	import "../app.css";
 
 	import { getFlash } from 'sveltekit-flash-message';
-	import { page } from '$app/state';
+	import { page, navigating } from '$app/state';
 
 	import MainNav from '$components/Layout/MainNav.svelte';
 	import Flash from '$components/Layout/Flash.svelte';
@@ -29,7 +29,27 @@
 		return () => data.subscription.unsubscribe()
 	})
 
+	// Handle flash messages
 	const flash = getFlash(page);
+
+	// Handle loading status
+	const SHOW_LOADING_DELAY_MS = 300
+	let showLoadingRef: ReturnType<typeof setTimeout>
+	let showLoading = $state(false)
+
+	$effect(() => {
+		// Navigation changed, skip any existing wait for showing an indicator.
+		clearTimeout(showLoadingRef)
+		if (navigating.complete == null) {
+			// Navigation completed, hide loading indicator now.
+			showLoading = false
+		} else {
+			// Navigation in progress, show loading indicator in a bit.
+			showLoadingRef = setTimeout(() => {
+				showLoading = true
+			}, SHOW_LOADING_DELAY_MS)
+		}
+	})
 </script>
 
 <div class="min-h-dvh flex flex-col bg-base-100">
@@ -40,4 +60,10 @@
 	{/if}
 
 	{@render children()}
+
+	{#if showLoading}
+		<div class="absolute top-0 left-0 right-0 bottom-0 z-10 flex items-center justify-center bg-base-100">
+			Loading... <span class="loading loading-spinner text-secondary"></span>
+		</div>
+	{/if}
 </div>
