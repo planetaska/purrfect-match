@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatGeneral } from 'cleave-zen'
+	// import { formatGeneral } from 'cleave-zen'
 	import { onMount } from 'svelte';
 	import { zip } from '$utils/store';
 
@@ -44,12 +44,14 @@
 		input.value = await getZipCode() as string;
 	}
 
+	function formatZipCode(value: string) {
+		const numericValue = value.replace(/[^0-9]/g, '');
+		return numericValue.slice(0, 5);
+	}
+
 	onMount(() => {
 		zip_input.addEventListener('input', (e) => {
-			zip_input.value = formatGeneral((e.target as HTMLInputElement)?.value, {
-				blocks: [5],
-				numericOnly: true
-			})
+			zip_input.value = formatZipCode((e.target as HTMLInputElement)?.value)
 		})
 
 		// avoid asking everytime

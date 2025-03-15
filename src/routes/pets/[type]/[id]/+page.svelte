@@ -184,7 +184,7 @@
 						Meet {animal.name}
 					</h3>
 					<div>
-						{unescape(animal.description)}
+						{animal.description ? unescape(animal.description) : ''}
 						<p class="mt-3">
 							<a href={animal.url} target="_blank" class="link link-primary">Read more on PetFinder.com</a>
 						</p>
