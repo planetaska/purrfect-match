@@ -1,8 +1,11 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+	import AddFavorite from '$components/Ui/AddFavorite.svelte';
 	import { unescape } from 'es-toolkit/string'
 
 	let { data }: PageProps = $props()
+	let { supabase, user } = $derived(data)
+
 	const animal = $derived(data.animal)
 	const cover_photo = $derived.by(() => {
 		return animal.photos.length > 0 ? animal.photos[0].large : `/images/layout/placeholder/${data.type}.png`
@@ -71,6 +74,7 @@
 		const randomIndex = Math.floor(Math.random() * options.length);
 		return options[randomIndex];
 	}
+
 </script>
 
 <div class="bg-base-100">
@@ -100,8 +104,8 @@
 						</ul>
 						{animal.type}
 					</div>
+					<AddFavorite {supabase} {animal} {user}/>
 				</div>
-
 				<div class="mt-6 space-y-6 border-b border-gray-200 pb-4">
 					<div class="sm:hidden flex justify-between items-end">
 						<h3 class="text-base-content text-xl">
