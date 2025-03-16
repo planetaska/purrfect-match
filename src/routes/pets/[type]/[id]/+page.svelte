@@ -87,7 +87,12 @@
 		<div class="grid grid-cols-1 items-start gap-x-8 gap-y-16 lg:grid-cols-2">
 			<div>
 				<div class="border-b border-gray-200 pb-4">
-					<h2 class="font-medium text-gray-500">{animal.breeds.primary}</h2>
+					<h2 class="font-medium text-gray-500">
+						{animal.breeds.primary}
+						{#if animal.contact.address.city}
+							in {animal.contact.address.city}
+						{/if}
+					</h2>
 					<p class="mt-2 text-3xl font-bold tracking-tight text-base-content sm:text-4xl">{animal.name}</p>
 					<div class="text-base-content">
 						is a
@@ -104,7 +109,6 @@
 						</ul>
 						{animal.type}
 					</div>
-					<AddFavorite {supabase} {animal} {user}/>
 				</div>
 				<div class="mt-6 space-y-6 border-b border-gray-200 pb-4">
 					<div class="sm:hidden flex justify-between items-end">
@@ -192,7 +196,12 @@
 				</div>
 			</div>
 
-			<div>
+			<div class="relative">
+				{#if user}
+					<div class="absolute top-4 right-4 z-10">
+						<AddFavorite {supabase} {animal} {user}/>
+					</div>
+				{/if}
 				<button onclick={() => modal.showModal()}>
 					<img src={cover_photo} alt="" class="mask mask-squircle cursor-pointer aspect-square w-full rounded-lg bg-gray-100 object-cover">
 				</button>

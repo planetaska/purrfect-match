@@ -43,10 +43,20 @@ export const load: PageServerLoad = async ({ parent, params, url, cookies }) => 
 	});
 
 	// get the zip code from url params
-	let zip: string | undefined = url.searchParams.get('zip') || undefined
-	// or get zip from cookies; set empty if not available
-	if (!zip) zip = cookies.get('zip') || ''
-	searchParams.append('location', zip)
+	// if we get zip=(empty), keep the zip out of query to allow search all regions
+	let zip: string | null
+	if (url.searchParams.has('zip')) {
+		zip = url.searchParams.get('zip')
+		if (zip !== '') {
+			searchParams.append('location', zip)
+		}
+	} else {
+		zip = cookies.get('zip') || ''
+		searchParams.append('location', zip)
+	}
+	// let zip: string | undefined = url.searchParams.get('zip') || undefined
+	// if (!zip) zip = cookies.get('zip') || ''
+	// searchParams.append('location', zip)
 
 	searchParams.append('type', type.slice(0, -1))
 	searchParams.append('limit', '18')
