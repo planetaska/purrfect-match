@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { PageProps } from './$types';
 	import { snakeCase } from 'es-toolkit';
 
 	let {
 		sizes, ages, genders, coats, envs, toggleMobFilter
-	}: PageProps = $props();
+	} = $props();
 
 	let form: HTMLFormElement
 

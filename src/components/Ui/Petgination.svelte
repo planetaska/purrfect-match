@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { PageProps } from './$types'
 	import { page } from '$app/state'
 
-	let { pagi }: PageProps = $props()
+	let { pagi } = $props()
 	const params = $derived.by(() => {
 		let pams = page.url.searchParams
 		pams.delete('page')
