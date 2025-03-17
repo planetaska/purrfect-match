@@ -1,32 +1,34 @@
 <script lang="ts">
-	// import { onMount } from 'svelte';
-	import { snakeCase } from 'es-toolkit';
+	import { superForm } from 'sveltekit-superforms';
+	import type { SuperForm } from 'sveltekit-superforms';
+	import type { FilterSchema } from '$lib/schemas';
 
 	let {
-		sizes, ages, genders, coats, envs, toggleMobFilter
-	} = $props();
+		sizes, ages, genders, coats, envs, toggleMobFilter, form
+	} = $props<{
+		sizes: string[];
+		ages: string[];
+		genders: string[];
+		coats: string[];
+		envs: string[];
+		toggleMobFilter: () => void;
+		form: SuperForm<FilterSchema>;
+	}>();
 
-	let form: HTMLFormElement
+	const { form: filterForm } = superForm(form);
 
-	// function submitForm() {
-	// 	form.requestSubmit()
-	// }
+	let filter_form:HTMLFormElement;
 
 	function menuClose() {
-		form.requestSubmit()
+		// Trigger form submission on menu close
+		filter_form.requestSubmit();
 	}
-
-	// onMount(() => {
-	// 	// document.querySelectorAll('input[type="radio"][name="sort"]').forEach(el => {
-	// 	// 	el.addEventListener('change', submitForm)
-	// 	// })
-	// })
 </script>
 
 <section aria-labelledby="filter-heading" class="border-t border-gray-200 pt-6">
 	<h2 id="filter-heading" class="sr-only">Search filters</h2>
 
-	<form bind:this={form} method="get" class="flex items-center justify-between">
+	<form bind:this={filter_form} method="get" class="flex items-center justify-between">
 		<div class="relative inline-block text-left">
 			<div class="dropdown">
 				<div tabindex="0" role="button" class="group inline-flex justify-center text-sm font-medium text-base-content hover:text-gray-400">
@@ -38,31 +40,31 @@
 				<ul tabindex="-1" onblur={menuClose} class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
 					<li>
 						<label>
-							<input type="radio" name="sort" value="recent" class="radio" checked />
+							<input type="radio" name="sort" value="recent" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === 'recent'} />
 							Most Recent
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="-recent" class="radio" />
+							<input type="radio" name="sort" value="-recent" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === '-recent'} />
 							Oldest Top
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="distance" class="radio" />
+							<input type="radio" name="sort" value="distance" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === 'distance'} />
 							Nearest to me
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="-distance" class="radio" />
+							<input type="radio" name="sort" value="-distance" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === '-distance'} />
 							Farthest from me
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="random" class="radio" />
+							<input type="radio" name="sort" value="random" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === 'random'} />
 							Random
 						</label>
 					</li>
@@ -86,7 +88,8 @@
 					{#each sizes as size}
 						<li>
 							<label>
-								<input type="checkbox" name="size" value="{size.toLowerCase()}" class="checkbox" />
+								<input type="checkbox" name="size" value="{size.toLowerCase()}" class="checkbox" 
+									checked={$filterForm.size?.includes(size.toLowerCase())} />
 								{size}
 							</label>
 						</li>
@@ -105,7 +108,8 @@
 					{#each ages as age}
 						<li>
 							<label>
-								<input type="checkbox" name="age" value="{age.toLowerCase()}" class="checkbox" />
+								<input type="checkbox" name="age" value="{age.toLowerCase()}" class="checkbox"
+									checked={$filterForm.age?.includes(age.toLowerCase())} />
 								{age}
 							</label>
 						</li>
@@ -124,7 +128,8 @@
 					{#each genders as gender}
 						<li>
 							<label>
-								<input type="checkbox" name="gender" value="{gender.toLowerCase()}" class="checkbox" />
+								<input type="checkbox" name="gender" value="{gender.toLowerCase()}" class="checkbox"
+									checked={$filterForm.gender?.includes(gender.toLowerCase())} />
 								{gender}
 							</label>
 						</li>
@@ -143,7 +148,8 @@
 					{#each coats as coat}
 						<li>
 							<label>
-								<input type="checkbox" name="coat" value="{coat.toLowerCase()}" class="checkbox" />
+								<input type="checkbox" name="coat" value="{coat.toLowerCase()}" class="checkbox"
+									checked={$filterForm.coat?.includes(coat.toLowerCase())} />
 								{coat}
 							</label>
 						</li>
@@ -160,12 +166,31 @@
 				</div>
 				<ul tabindex="-1" onblur={menuClose} class="dropdown-content mt-2 menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
 					{#each envs as env}
-						<li>
-							<label>
-								<input type="checkbox" name={snakeCase(env)} value="true" class="checkbox" />
-								{env}
-							</label>
-						</li>
+						{#if env === "Good with children"}
+							<li>
+								<label>
+									<input type="checkbox" name="env_children" value="true" class="checkbox"
+										checked={$filterForm.env_children} />
+									{env}
+								</label>
+							</li>
+						{:else if env === "Good with cats"}
+							<li>
+								<label>
+									<input type="checkbox" name="env_cats" value="true" class="checkbox"
+										checked={$filterForm.env_cats} />
+									{env}
+								</label>
+							</li>
+						{:else if env === "Good with dogs"}
+							<li>
+								<label>
+									<input type="checkbox" name="env_dogs" value="true" class="checkbox"
+										checked={$filterForm.env_dogs} />
+									{env}
+								</label>
+							</li>
+						{/if}
 					{/each}
 				</ul>
 			</div>
