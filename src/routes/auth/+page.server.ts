@@ -3,7 +3,6 @@
 	Form actions: register, sign_in
  */
 
-import { fail } from '@sveltejs/kit'
 import { redirect } from 'sveltekit-flash-message/server'
 
 import type { Actions } from './$types'
@@ -48,7 +47,7 @@ export const actions: Actions = {
 		}
 	},
 
-	reset_password: async ({ request, locals: { supabase } }) => {
+	reset_password: async ({ request, cookies, locals: { supabase } }) => {
 		const formData = await request.formData()
 		const email = formData.get('email') as string
 
@@ -61,7 +60,7 @@ export const actions: Actions = {
 			redirect(303, '/auth/error?message=' + error.code)
 		} 
 		else {
-			redirect(303, '/');
+			redirect(303, '/', { type: 'success', message: "Check your email for reset password link!" }, cookies);
 		}
 	},
 	
@@ -76,13 +75,14 @@ export const actions: Actions = {
 			const {error} = await supabase.auth.updateUser({ password: newPassword })
 			if (error) {
 				console.error(error)
-				return fail(500, { error})
+				redirect(303, '/auth/error?message=' + error.code)
 			} else {
 				console.log("succes!");
-				redirect(303, '/sign-in', { type: 'success', message: "Sign in" }, cookies)
+				redirect(303, '/', { type: 'success', message: "Update password successful" }, cookies)
 			}
 		} else{
 			console.log("passwords don't match!");
+			redirect(303, '/update', { type: 'success', message: "Passwords don't match" }, cookies)
 		}
 	}
 }
