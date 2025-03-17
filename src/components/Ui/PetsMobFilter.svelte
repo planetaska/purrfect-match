@@ -1,15 +1,27 @@
 <script lang="ts">
-	import { snakeCase } from 'es-toolkit';
+	import { superForm } from 'sveltekit-superforms';
+	import type { SuperForm } from 'sveltekit-superforms';
+	import type { FilterSchema } from '$lib/schemas';
 
 	let {
-		sizes, ages, genders, coats, envs, toggleMobFilter
-	} = $props();
+		sizes, ages, genders, coats, envs, toggleMobFilter, form
+	} = $props<{
+		sizes: string[];
+		ages: string[];
+		genders: string[];
+		coats: string[];
+		envs: string[];
+		toggleMobFilter: () => void;
+		form: SuperForm<FilterSchema>;
+	}>();
 
-	let form: HTMLFormElement
+	const { form: filterForm } = superForm(form);
+
+	let filter_form: HTMLFormElement;
 
 	function submitForm() {
-		form.requestSubmit()
-		toggleMobFilter()
+		filter_form.requestSubmit();
+		toggleMobFilter();
 	}
 </script>
 
@@ -40,7 +52,10 @@
 			</div>
 
 			<!-- Filters -->
-			<form bind:this={form} method="get" class="mt-4">
+			<form bind:this={filter_form} method="get" class="mt-4">
+				<!-- Hidden input for sort -->
+				<input type="hidden" name="sort" value={$filterForm.sort} />
+				
 				<div class="border-t border-gray-200 px-4 py-6">
 					<h3 class="-mx-2 -my-3 flow-root">
 						<button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400" aria-controls="filter-section-0" aria-expanded="false">
@@ -52,7 +67,8 @@
 							{#each sizes as size}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="size" value="{size.toLowerCase()}" class="checkbox" />
+										<input type="checkbox" name="size" value="{size.toLowerCase()}" class="checkbox"
+											checked={$filterForm.size?.includes(size.toLowerCase())} />
 										{size}
 									</label>
 								</div>
@@ -71,7 +87,8 @@
 							{#each ages as age}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="age" value="{age.toLowerCase()}" class="checkbox" />
+										<input type="checkbox" name="age" value="{age.toLowerCase()}" class="checkbox"
+											checked={$filterForm.age?.includes(age.toLowerCase())} />
 										{age}
 									</label>
 								</div>
@@ -90,7 +107,8 @@
 							{#each genders as gender}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="gender" value="{gender.toLowerCase()}" class="checkbox" />
+										<input type="checkbox" name="gender" value="{gender.toLowerCase()}" class="checkbox"
+											checked={$filterForm.gender?.includes(gender.toLowerCase())} />
 										{gender}
 									</label>
 								</div>
@@ -109,7 +127,8 @@
 							{#each coats as coat}
 								<div>
 									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name="coat" value="{coat.toLowerCase()}" class="checkbox" />
+										<input type="checkbox" name="coat" value="{coat.toLowerCase()}" class="checkbox"
+											checked={$filterForm.coat?.includes(coat.toLowerCase())} />
 										{coat}
 									</label>
 								</div>
@@ -126,12 +145,31 @@
 					<div class="pt-6" id="filter-section-0">
 						<div class="space-y-6">
 							{#each envs as env}
-								<div>
-									<label class="flex items-center gap-x-3 text-sm text-gray-500">
-										<input type="checkbox" name={snakeCase(env)} value="true" class="checkbox" />
-										{env}
-									</label>
-								</div>
+								{#if env === "Good with children"}
+									<div>
+										<label class="flex items-center gap-x-3 text-sm text-gray-500">
+											<input type="checkbox" name="env_children" value="true" class="checkbox"
+												checked={$filterForm.env_children} />
+											{env}
+										</label>
+									</div>
+								{:else if env === "Good with cats"}
+									<div>
+										<label class="flex items-center gap-x-3 text-sm text-gray-500">
+											<input type="checkbox" name="env_cats" value="true" class="checkbox"
+												checked={$filterForm.env_cats} />
+											{env}
+										</label>
+									</div>
+								{:else if env === "Good with dogs"}
+									<div>
+										<label class="flex items-center gap-x-3 text-sm text-gray-500">
+											<input type="checkbox" name="env_dogs" value="true" class="checkbox"
+												checked={$filterForm.env_dogs} />
+											{env}
+										</label>
+									</div>
+								{/if}
 							{/each}
 						</div>
 					</div>

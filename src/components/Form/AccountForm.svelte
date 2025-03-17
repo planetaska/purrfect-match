@@ -19,15 +19,6 @@
 
 		<form method="POST" action="?/account" class="md:col-span-2" use:enhance>
 			<div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
-				<!-- Saved for later if we decided to add user avatars -->
-				<!--						<div class="col-span-full flex items-center gap-x-8">-->
-				<!--							<img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-24 flex-none rounded-lg bg-gray-800 object-cover">-->
-				<!--							<div>-->
-				<!--								<button type="button" class="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-baes-content shadow-xs hover:bg-white/20">Change avatar</button>-->
-				<!--								<p class="mt-2 text-xs/5 text-baes-content">JPG, GIF or PNG. 1MB max.</p>-->
-				<!--							</div>-->
-				<!--						</div>-->
-
 				<div class="sm:col-span-3">
 					<label for="first-name" class="block text-sm/6 font-medium text-baes-content">Full name</label>
 					<div class="mt-2">

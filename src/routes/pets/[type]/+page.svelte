@@ -10,6 +10,7 @@
 
 	let { data }: PageProps = $props();
 	let zip = $derived(data.zip)
+	let filter_form = $derived(data.filter_form)
 
 	const sizes = ["Small", "Medium", "Large", "XLarge"];
 	const ages = ["Baby", "Young", "Adult", "Senior"];
@@ -21,10 +22,7 @@
 
 	function toggleMobFilter() { show_mob_filter = !show_mob_filter }
 
-	function updateZip(zip) {
-		// console.log(zip)
-		// triggers load function to refresh data
-		// invalidateAll()
+	function updateZip(zip: string) {
 		goto(`/pets/${data.type}?zip=${zip}`)
 	}
 </script>
@@ -32,7 +30,7 @@
 <div class="flex grow bg-base-100">
 	<div class="w-full">
 		{#if show_mob_filter}
-			<PetsMobFilter {sizes} {ages} {genders} {coats} {envs} {toggleMobFilter} />
+			<PetsMobFilter {sizes} {ages} {genders} {coats} {envs} {toggleMobFilter} form={filter_form} />
 		{/if}
 
 		<main>
@@ -50,7 +48,7 @@
 				<!-- Animals grid -->
 				{#if data.animals.length > 0}
 					<!-- Filters -->
-					<PetsFilter {sizes} {ages} {genders} {coats} {envs} {toggleMobFilter} />
+					<PetsFilter {sizes} {ages} {genders} {coats} {envs} {toggleMobFilter} form={filter_form} />
 
 					<section aria-labelledby="animals-heading" class="mt-8 mb-8">
 						<h2 id="animals-heading" class="sr-only">Animals</h2>

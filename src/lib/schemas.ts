@@ -19,5 +19,17 @@ export const prefsSchema = z.object({
 	env_cats: z.boolean(),
 });
 
+export const filterSchema = z.object({
+	sort: z.string().default('recent'),
+	size: z.string().array().optional(),
+	age: z.string().array().optional(),
+	gender: z.string().array().optional(),
+	coat: z.string().array().optional(),
+	env_children: z.boolean().optional(),
+	env_dogs: z.boolean().optional(),
+	env_cats: z.boolean().optional(),
+});
+
 export type AccountSchema = typeof accountSchema;
 export type PrefsSchema = typeof prefsSchema;
+export type FilterSchema = typeof filterSchema;
