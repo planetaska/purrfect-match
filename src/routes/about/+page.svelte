@@ -10,8 +10,10 @@
 			<h1 class="text-4xl font-bold tracking-tight text-white lg:text-6xl">Purrfect Match</h1>
 			<h1 class="text-4xl font-bold tracking-tight text-white lg:text-3xl">...is a student project website</h1>
 			<p class="mt-4 text-xl text-white">This website is a student project and not intended for real use.</p>
+			<p class="mt-4 text-xl text-white">The idea behind Purrfect Match was to create an application that would connect users with pets that are compatible with their lifestyle, so as to increase the likelihood of successful pet adoptions. </p>
+
 			<p class="mt-4 text-xl text-white">
-				However, the animals featured here are based on real data from PetFinder.com.
+				The animals featured here are based on real data from PetFinder.com.
 				<br>
 				If you’re interested in adopting a pet, please visit PetFinder.com to complete the adoption process!
 			</p>
