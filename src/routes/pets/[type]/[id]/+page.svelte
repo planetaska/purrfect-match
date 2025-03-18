@@ -80,7 +80,7 @@
 <div class="bg-base-100">
 	<div class="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8">
 		<div class="pb-4">
-			<button onclick={() => history.back()} class="link link-info link-hover">
+			<button onclick={() => history.back()} tabindex="0" class="link link-info link-hover">
 				&larr; Back to list
 			</button>
 		</div>
@@ -190,7 +190,7 @@
 					<div>
 						{animal.description ? unescape(animal.description) : ''}
 						<p class="mt-3">
-							<a href={animal.url} target="_blank" class="link link-primary">Read more on PetFinder.com</a>
+							<a href={animal.url} target="_blank" tabindex="0" class="link link-primary">Read more on PetFinder.com</a>
 						</p>
 					</div>
 				</div>

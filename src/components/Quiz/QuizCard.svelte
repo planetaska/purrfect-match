@@ -27,13 +27,13 @@
 						{#if quiz.multiple}
 							<div class="flex items-center gap-x-2">
 								<input type="checkbox"
-											 bind:group={selection} value={answer}
+											 bind:group={selection} value={answer} tabindex="0"
 											 id="option-{index}-{idx}" name="answer-{index}" class="checkbox checkbox-primary" />
 								<label for="option-{index}-{idx}">{answer}</label>
 							</div>
 						{:else}
 							<div class="flex items-center gap-x-2">
-								<input type="radio"
+								<input type="radio" tabindex="0"
 											 bind:group={selection} value={answer} onclick={() => setTimeout(passAnswer, 200)}
 											 id="option-{index}-{idx}" name="answer-{index}" class="radio radio-primary" />
 								<label for="option-{index}-{idx}">{answer}</label>
@@ -41,7 +41,7 @@
 						{/if}
 					{/each}
 					{#if quiz.multiple}
-						<button onclick={passAnswer} class="btn btn-primary mt-6">{selection.length === 0 ? 'No preference' : 'Next'}</button>
+						<button onclick={passAnswer} class="btn btn-primary mt-6" tabindex="0">{selection.length === 0 ? 'No preference' : 'Next'}</button>
 					{/if}
 				</div>
 			</div>

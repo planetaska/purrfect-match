@@ -76,7 +76,7 @@
 			</div>
 
 			<div class="mt-8 flex gap-x-4 items-center">
-				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="submit" class="btn btn-primary" tabindex="0">Save</button>
 				{#if $delayed}
 					<span class="loading loading-spinner loading-sm text-primary" aria-label="Loading"></span>
 				{/if}
@@ -92,7 +92,7 @@
 		</div>
 
 		<form method="POST" action="?/quit" class="flex items-start md:col-span-2">
-			<button type="submit" class="btn btn-secondary">Yes, delete my account</button>
+			<button type="submit" class="btn btn-secondary" tabindex="0">Yes, delete my account</button>
 		</form>
 	</div>
 </div>

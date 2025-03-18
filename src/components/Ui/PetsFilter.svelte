@@ -40,31 +40,31 @@
 				<ul tabindex="-1" onblur={menuClose} class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
 					<li>
 						<label>
-							<input type="radio" name="sort" value="recent" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === 'recent'} />
+							<input type="radio" name="sort" value="recent" class="radio" tabindex="0" bind:group={$filterForm.sort} checked={$filterForm.sort === 'recent'} />
 							Most Recent
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="-recent" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === '-recent'} />
+							<input type="radio" name="sort" value="-recent" class="radio" tabindex="0" bind:group={$filterForm.sort} checked={$filterForm.sort === '-recent'} />
 							Oldest Top
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="distance" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === 'distance'} />
+							<input type="radio" name="sort" value="distance" class="radio" tabindex="0" bind:group={$filterForm.sort} checked={$filterForm.sort === 'distance'} />
 							Nearest to me
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="-distance" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === '-distance'} />
+							<input type="radio" name="sort" value="-distance" class="radio" tabindex="0" bind:group={$filterForm.sort} checked={$filterForm.sort === '-distance'} />
 							Farthest from me
 						</label>
 					</li>
 					<li>
 						<label>
-							<input type="radio" name="sort" value="random" class="radio" bind:group={$filterForm.sort} checked={$filterForm.sort === 'random'} />
+							<input type="radio" name="sort" value="random" class="radio" tabindex="0" bind:group={$filterForm.sort} checked={$filterForm.sort === 'random'} />
 							Random
 						</label>
 					</li>
@@ -88,7 +88,7 @@
 					{#each sizes as size}
 						<li>
 							<label>
-								<input type="checkbox" name="size" value="{size.toLowerCase()}" class="checkbox" 
+								<input type="checkbox" name="size" value="{size.toLowerCase()}" class="checkbox" tabindex="0"
 									checked={$filterForm.size?.includes(size.toLowerCase())} />
 								{size}
 							</label>
@@ -108,7 +108,7 @@
 					{#each ages as age}
 						<li>
 							<label>
-								<input type="checkbox" name="age" value="{age.toLowerCase()}" class="checkbox"
+								<input type="checkbox" name="age" value="{age.toLowerCase()}" class="checkbox" tabindex="0"
 									checked={$filterForm.age?.includes(age.toLowerCase())} />
 								{age}
 							</label>
@@ -128,7 +128,7 @@
 					{#each genders as gender}
 						<li>
 							<label>
-								<input type="checkbox" name="gender" value="{gender.toLowerCase()}" class="checkbox"
+								<input type="checkbox" name="gender" value="{gender.toLowerCase()}" class="checkbox" tabindex="0"
 									checked={$filterForm.gender?.includes(gender.toLowerCase())} />
 								{gender}
 							</label>
@@ -148,7 +148,7 @@
 					{#each coats as coat}
 						<li>
 							<label>
-								<input type="checkbox" name="coat" value="{coat.toLowerCase()}" class="checkbox"
+								<input type="checkbox" name="coat" value="{coat.toLowerCase()}" class="checkbox" tabindex="0"
 									checked={$filterForm.coat?.includes(coat.toLowerCase())} />
 								{coat}
 							</label>
@@ -169,7 +169,7 @@
 						{#if env === "Good with children"}
 							<li>
 								<label>
-									<input type="checkbox" name="env_children" value="true" class="checkbox"
+									<input type="checkbox" name="env_children" value="true" class="checkbox" tabindex="0"
 										checked={$filterForm.env_children} />
 									{env}
 								</label>
@@ -177,7 +177,7 @@
 						{:else if env === "Good with cats"}
 							<li>
 								<label>
-									<input type="checkbox" name="env_cats" value="true" class="checkbox"
+									<input type="checkbox" name="env_cats" value="true" class="checkbox" tabindex="0"
 										checked={$filterForm.env_cats} />
 									{env}
 								</label>
@@ -185,7 +185,7 @@
 						{:else if env === "Good with dogs"}
 							<li>
 								<label>
-									<input type="checkbox" name="env_dogs" value="true" class="checkbox"
+									<input type="checkbox" name="env_dogs" value="true" class="checkbox" tabindex="0"
 										checked={$filterForm.env_dogs} />
 									{env}
 								</label>

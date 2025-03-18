@@ -30,7 +30,7 @@
 						<legend id="size-legend" class="fieldset-legend text-sm/6">Size</legend>
 						{#each size_options as size, i}
 						<div class="flex items-center gap-2">
-							<input type="checkbox" id="size-{i}" bind:group={$form.size} name="size" value="{size}" class="checkbox" aria-labelledby="size-legend size-label-{i}" />
+							<input type="checkbox" id="size-{i}" bind:group={$form.size} name="size" value="{size}" class="checkbox" aria-labelledby="size-legend size-label-{i}" tabindex="0" />
 							<label id="size-label-{i}" for="size-{i}" class="fieldset-label text-sm/6 text-base-content">{size}</label>
 						</div>
 						{/each}
@@ -42,7 +42,7 @@
 						<legend id="age-legend" class="fieldset-legend text-sm/6">Age</legend>
 						{#each age_options as age, i}
 							<div class="flex items-center gap-2">
-								<input type="checkbox" id="age-{i}" bind:group={$form.age} name="age" value="{age}" class="checkbox" aria-labelledby="age-legend age-label-{i}" />
+								<input type="checkbox" id="age-{i}" bind:group={$form.age} name="age" value="{age}" class="checkbox" aria-labelledby="age-legend age-label-{i}" tabindex="0" />
 								<label id="age-label-{i}" for="age-{i}" class="fieldset-label text-sm/6 text-base-content">{age}</label>
 							</div>
 						{/each}
@@ -74,22 +74,22 @@
 
 				<div class="sm:col-span-3 sm:col-start-1 flex items-center justify-between">
 					<label for="env_children" class="block text-sm/6 font-medium text-base-content">Children in environment?</label>
-					<input type="checkbox" bind:checked={$form.env_children} name="env_children" id="env_children" class="checkbox checkbox-primary" aria-label="Children in environment" />
+					<input type="checkbox" bind:checked={$form.env_children} name="env_children" id="env_children" class="checkbox checkbox-primary" aria-label="Children in environment" tabindex="0" />
 				</div>
 
 				<div class="sm:col-span-3 sm:col-start-1 flex items-center justify-between">
 					<label for="env_dogs" class="block text-sm/6 font-medium text-base-content">Dogs in environment?</label>
-					<input type="checkbox" bind:checked={$form.env_dogs} name="env_dogs" id="env_dogs" class="checkbox checkbox-primary" aria-label="Dogs in environment" />
+					<input type="checkbox" bind:checked={$form.env_dogs} name="env_dogs" id="env_dogs" class="checkbox checkbox-primary" aria-label="Dogs in environment" tabindex="0" />
 				</div>
 
 				<div class="sm:col-span-3 sm:col-start-1 flex items-center justify-between">
 					<label for="env_cats" class="block text-sm/6 font-medium text-base-content">Cats in environment?</label>
-					<input type="checkbox" bind:checked={$form.env_cats} name="env_cats" id="env_cats" class="checkbox checkbox-primary" aria-label="Cats in environment" />
+					<input type="checkbox" bind:checked={$form.env_cats} name="env_cats" id="env_cats" class="checkbox checkbox-primary" aria-label="Cats in environment" tabindex="0" />
 				</div>
 			</div>
 
 			<div class="mt-8 flex gap-x-4 items-center">
-				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="submit" class="btn btn-primary" tabindex="0">Save</button>
 				{#if $delayed}
 					<span class="loading loading-spinner loading-sm text-primary" aria-label="Loading"></span>
 				{/if}
