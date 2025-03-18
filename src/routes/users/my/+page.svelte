@@ -5,7 +5,6 @@
 	import PreferencesForm from '$components/Form/PreferencesForm.svelte';
 
 	let { data }: PageProps = $props()
-	// let { account_form, prefs_form } = $derived(data)
 </script>
 
 <main class="px-4">

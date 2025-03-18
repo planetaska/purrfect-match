@@ -26,31 +26,31 @@
 		<form method="POST" action="?/prefs" class="md:col-span-2" use:enhance>
 			<div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
 				<div class="sm:col-span-3">
-					<fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64">
-						<legend class="fieldset-legend text-sm/6">Size</legend>
-						{#each size_options as size}
-						<label class="fieldset-label text-sm/6 text-base-content">
-							<input type="checkbox" bind:group={$form.size} name="size" value="{size}" class="checkbox" />
-							{size}
-						</label>
+					<fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64" aria-labelledby="size-legend">
+						<legend id="size-legend" class="fieldset-legend text-sm/6">Size</legend>
+						{#each size_options as size, i}
+						<div class="flex items-center gap-2">
+							<input type="checkbox" id="size-{i}" bind:group={$form.size} name="size" value="{size}" class="checkbox" aria-labelledby="size-legend size-label-{i}" />
+							<label id="size-label-{i}" for="size-{i}" class="fieldset-label text-sm/6 text-base-content">{size}</label>
+						</div>
 						{/each}
 					</fieldset>
 				</div>
 
 				<div class="sm:col-span-3">
-					<fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64">
-						<legend class="fieldset-legend text-sm/6">Age</legend>
-						{#each age_options as age}
-							<label class="fieldset-label text-sm/6 text-base-content">
-								<input type="checkbox" bind:group={$form.age} name="age" value="{age}" class="checkbox" />
-								{age}
-							</label>
+					<fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64" aria-labelledby="age-legend">
+						<legend id="age-legend" class="fieldset-legend text-sm/6">Age</legend>
+						{#each age_options as age, i}
+							<div class="flex items-center gap-2">
+								<input type="checkbox" id="age-{i}" bind:group={$form.age} name="age" value="{age}" class="checkbox" aria-labelledby="age-legend age-label-{i}" />
+								<label id="age-label-{i}" for="age-{i}" class="fieldset-label text-sm/6 text-base-content">{age}</label>
+							</div>
 						{/each}
 					</fieldset>
 				</div>
 
 				<div class="sm:col-span-3">
-					<label for="gender" class="block text-sm/6 font-medium text-baes-content">Gender</label>
+					<label for="gender" class="block text-sm/6 font-medium text-base-content">Gender</label>
 					<div class="mt-2">
 						<select name="gender" id="gender" bind:value={$form.gender} class="select">
 							<option value="">No preference</option>
@@ -61,7 +61,7 @@
 				</div>
 
 				<div class="sm:col-span-3">
-					<label for="coat" class="block text-sm/6 font-medium text-baes-content">Coat</label>
+					<label for="coat" class="block text-sm/6 font-medium text-base-content">Coat</label>
 					<div class="mt-2">
 						<select name="coat" id="coat" bind:value={$form.coat} class="select">
 							<option value="">No preference</option>
@@ -73,27 +73,27 @@
 				</div>
 
 				<div class="sm:col-span-3 sm:col-start-1 flex items-center justify-between">
-					<label for="env_children" class="block text-sm/6 font-medium text-baes-content">Children in environment?</label>
-					<input type="checkbox" bind:checked={$form.env_children} name="env_children" id="env_children" class="checkbox checkbox-primary" />
+					<label for="env_children" class="block text-sm/6 font-medium text-base-content">Children in environment?</label>
+					<input type="checkbox" bind:checked={$form.env_children} name="env_children" id="env_children" class="checkbox checkbox-primary" aria-label="Children in environment" />
 				</div>
 
 				<div class="sm:col-span-3 sm:col-start-1 flex items-center justify-between">
-					<label for="env_dogs" class="block text-sm/6 font-medium text-baes-content">Dogs in environment?</label>
-					<input type="checkbox" bind:checked={$form.env_dogs} name="env_dogs" id="env_dogs" class="checkbox checkbox-primary" />
+					<label for="env_dogs" class="block text-sm/6 font-medium text-base-content">Dogs in environment?</label>
+					<input type="checkbox" bind:checked={$form.env_dogs} name="env_dogs" id="env_dogs" class="checkbox checkbox-primary" aria-label="Dogs in environment" />
 				</div>
 
 				<div class="sm:col-span-3 sm:col-start-1 flex items-center justify-between">
-					<label for="env_cats" class="block text-sm/6 font-medium text-baes-content">Cats in environment?</label>
-					<input type="checkbox" bind:checked={$form.cats} name="env_cats" id="env_cats" class="checkbox checkbox-primary" />
+					<label for="env_cats" class="block text-sm/6 font-medium text-base-content">Cats in environment?</label>
+					<input type="checkbox" bind:checked={$form.env_cats} name="env_cats" id="env_cats" class="checkbox checkbox-primary" aria-label="Cats in environment" />
 				</div>
 			</div>
 
 			<div class="mt-8 flex gap-x-4 items-center">
 				<button type="submit" class="btn btn-primary">Save</button>
 				{#if $delayed}
-					<span class="loading loading-spinner loading-sm text-primary"></span>
+					<span class="loading loading-spinner loading-sm text-primary" aria-label="Loading"></span>
 				{/if}
-				{#if $message}<span class="text-success">{$message}</span>{/if}
+				{#if $message}<span class="text-success" aria-live="polite">{$message}</span>{/if}
 			</div>
 		</form>
 	</div>

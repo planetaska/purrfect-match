@@ -76,7 +76,7 @@ export const actions = {
 
 		// Updating password
 		// Needs a separate process because Supabase constraints
-		if (form.data.password !== '' && form.data.password_confirm === form.data.password) {
+		if (form.data.password !== undefined && form.data.password_confirm === form.data.password) {
 			const { error: password_error } = await supabase.auth.updateUser({
 				password: form.data.password
 			})
