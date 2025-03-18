@@ -22,7 +22,7 @@
 		</div>
 		<ul role="list" class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 			<li>
-				<a href="/pets/cats">
+				<a href="/pets/cats" tabindex="0">
 				<img class="aspect-3/2 w-full rounded-2xl object-cover" src="/images/layout/cats/cats-17.jpg" alt="">
 				<h3 class="mt-6 text-lg/8 font-semibold tracking-tight text-base-content">Cats</h3>
 				<p class="text-base/7 text-gray-600 truncate">Maine Coon, Ragdoll, American Shorthair</p>
@@ -30,7 +30,7 @@
 			</li>
 
 			<li>
-				<a href="/pets/dogs">
+				<a href="/pets/dogs" tabindex="0">
 				<img class="aspect-3/2 w-full rounded-2xl object-cover" src="/images/layout/splash/purr-05.jpg" alt="">
 				<h3 class="mt-6 text-lg/8 font-semibold tracking-tight text-base-content">Dogs</h3>
 				<p class="text-base/7 text-gray-600 truncate">Golden Retriever, Labrador, German Shepherd</p>
@@ -38,7 +38,7 @@
 			</li>
 
 			<li>
-				<a href="/pets/rabbits">
+				<a href="/pets/rabbits" tabindex="0">
 				<img class="aspect-3/2 w-full rounded-2xl object-cover" src="/images/layout/rabbits/rabbits-10.jpg" alt="">
 				<h3 class="mt-6 text-lg/8 font-semibold tracking-tight text-base-content">Rabbits</h3>
 				<p class="text-base/7 text-gray-600 truncate">Holland Lop, Florida White, Flemish Giant</p>
@@ -46,7 +46,7 @@
 			</li>
 
 			<li>
-				<a href="/pets/birds">
+				<a href="/pets/birds" tabindex="0">
 				<img class="aspect-3/2 w-full rounded-2xl object-cover" src="/images/layout/birds/birds-01.jpg" alt="">
 				<h3 class="mt-6 text-lg/8 font-semibold tracking-tight text-base-content">Birds</h3>
 				<p class="text-base/7 text-gray-600 truncate">Parakeet, Canary, Lovebirds</p>

@@ -42,7 +42,7 @@
 <header class="sticky bg-base-100 inset-x-0 top-0 z-50">
 	<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
 		<div class="flex lg:flex-1">
-			<a href="/" class="-m-1.5 p-1.5 text-blue-400 flex items-center gap-x-2">
+			<a href="/" class="-m-1.5 p-1.5 text-blue-400 flex items-center gap-x-2" tabindex="0">
 				<span class="sr-only">Purrfect Match</span>
 				<svg class="h-8 w-8">
 					<use xlink:href="/images/layout/logo.svg#purr_logo"></use>
@@ -62,12 +62,12 @@
 			</button>
 		</div>
 		<div class="hidden lg:flex lg:gap-x-12">
-			<a href="/match" class="text-sm/6 font-semibold text-base-content">Match for Me</a>
-			<a href="/pets{$zip !== '' ? '?zip='+$zip : ''}" class="text-sm/6 font-semibold text-base-content">Find Pet</a>
+			<a href="/match" class="text-sm/6 font-semibold text-base-content" tabindex="0">Match for Me</a>
+			<a href="/pets{$zip !== '' ? '?zip='+$zip : ''}" class="text-sm/6 font-semibold text-base-content" tabindex="0">Find Pet</a>
 			{#if user}
-			<a href="/users/my/favorites" class="text-sm/6 font-semibold text-base-content">My Favorites</a>
+			<a href="/users/my/favorites" class="text-sm/6 font-semibold text-base-content" tabindex="0">My Favorites</a>
 			{/if}
-			<a href="/about" class="text-sm/6 font-semibold text-base-content">About</a>
+			<a href="/about" class="text-sm/6 font-semibold text-base-content" tabindex="0">About</a>
 		</div>
 		<div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-8 lg:items-center">
 			<div>
@@ -81,8 +81,8 @@
 						</div>
 					</div>
 					<ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-						<li><a href="/users/my">My profile</a></li>
-						<li><button onclick={signOut}>Sign out</button></li>
+						<li><a href="/users/my" tabindex="0">My profile</a></li>
+						<li><button onclick={signOut} tabindex="0">Sign out</button></li>
 					</ul>
 				</div>
 <!--				<details class="dropdown dropdown-end">-->
